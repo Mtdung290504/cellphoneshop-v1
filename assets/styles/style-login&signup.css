@@ -23,8 +23,8 @@ body {
     width: 100%;
     font-size: 18px;
 }
-.container form table label, input[type="text"], input[type="password"], input[type="submit"], input[type="email"], input[type="tel"], input[type="date"], input[type="number"] {
-    font-size: 20px;
+.container form table label, textarea, input[type="text"], input[type="password"], input[type="submit"], input[type="email"], input[type="tel"], input[type="date"], input[type="number"] {
+    font-size: 18px;
     padding: 12px;
     margin: 10px 0px;
     font-family: 'Times New Roman', Times, serif;
@@ -32,7 +32,7 @@ body {
 .container form table label {
     font-size: 18px;
 }
-.container form table input[type="text"], input[type="password"], input[type="email"], input[type="tel"], input[type="date"], input[type="number"] {
+.container form table textarea, input[type="text"], input[type="password"], input[type="email"], input[type="tel"], input[type="date"], input[type="number"] {
     cursor: text;
     width: 100%;
     border: 1px solid lightgray;

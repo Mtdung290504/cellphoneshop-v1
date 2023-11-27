@@ -17,14 +17,14 @@
 
     function getRequest($type, $key) {
         switch ($type) {
-            case 'get':
-                return isset($_GET[$key]) ? $_GET[$key] : null;
-            case 'post':
-                return isset($_POST[$key]) ? $_POST[$key] : null;
-            case 'session':
-                return isset($_SESSION[$key]) ? $_SESSION[$key] : null;
-            case 'cookies':
-                return isset($_COOKIE[$key]) ? $_COOKIE[$key] : null;
+            case 'g':
+                return isset($_GET[$key]) ? $_GET[$key] : '';
+            case 'p':
+                return isset($_POST[$key]) ? $_POST[$key] : '';
+            case 's':
+                return isset($_SESSION[$key]) ? $_SESSION[$key] : '';
+            case 'c':
+                return isset($_COOKIE[$key]) ? $_COOKIE[$key] : '';
             default:
                 return null;
         }

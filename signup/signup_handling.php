@@ -1,16 +1,16 @@
 <?php
-    $login_name = isset($_POST['login_name']) ? $_POST['login_name'] : '';
-    $login_password = isset($_POST['login_password']) ? $_POST['login_password'] : '';
-    $re_login_password = isset($_POST['re_login_password']) ? $_POST['re_login_password'] : '';
-    $user_name = isset($_POST['user_name']) ? $_POST['user_name'] : '';
-    $user_birthday = isset($_POST['user_birthday']) ? $_POST['user_birthday'] : '';
-    $user_tel = isset($_POST['user_tel']) ? $_POST['user_tel'] : '';
-    $user_email = isset($_POST['user_email']) ? $_POST['user_email'] : '';
+    $login_name = getRequest('p', 'login_name');
+    $login_password = getRequest('p', 'login_password');
+    $re_login_password = getRequest('p', 're_login_password');
+    $user_name = getRequest('p', 'user_name');
+    $user_tel = getRequest('p', 'user_tel');
+    $user_email = getRequest('p', 'user_email');
+    $user_address = getRequest('p', 'user_address');
 
     $error_login_name = $error_login_password = $error_re_login_password = '';
 
-    if(isset($_POST['signup'])) {
-        $stmt = $conn->prepare('SELECT user_login_name FROM accounts WHERE user_login_name = ?');
+    if(getRequest('p', 'signup')) {
+        $stmt = $conn->prepare('SELECT ten_dang_nhap FROM nguoidung WHERE ten_dang_nhap = ?');
         $stmt->bind_param("s", $login_name);
         $stmt->execute();
         $rs = $stmt->get_result()->num_rows;
@@ -19,33 +19,34 @@
             $login_name = '';
             $error_login_name = '*Tên đăng nhập đã tồn tại';
         } else {
-            if(strlen($login_name) <= 6) {
+            if(!preg_match('/^[a-zA-Z0-9_]{6,20}$/', $login_name)) {
                 $login_name = '';
-                $error_login_name = '*Tên đăng nhập quá ngắn';
+                $error_login_name = '*Tên đăng nhập không hợp lệ!';
             }
-            if(strlen($login_password) <= 6) {
+            if(!preg_match('/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/', $login_password)) {
                 $login_password = '';
                 $re_login_password = '';
-                $error_login_password = '*Mật khẩu quá ngắn';
+                $error_login_password = '*Mật khẩu không hợp lệ!';
             }
             if($re_login_password != $login_password) {
                 $re_login_password = '';
-                $error_re_login_password = '*Mật khẩu nhập lại sai';
+                $error_re_login_password = '*Mật khẩu nhập lại không đúng!';
             }
             
             if($error_login_name == '' && $error_login_password == '' && $error_re_login_password == '') {
-                $stmt = $conn->prepare('INSERT INTO accounts (user_login_name, user_login_password, user_name, user_birthday, user_sdt, user_email)
-                    VALUE (?, ?, ?, ?, ?, ?);
-                ');
-                $stmt->bind_param('ssssss', $login_name, $login_password, $user_name, $user_birthday, $user_tel, $user_email);
-                $stmt->execute();
-                echo '<script>
-                    alert("Đăng Ký Thành Công!");
-                    location.href = "?action=login";
-                </script>';
+                $query = 'INSERT INTO nguoidung (ten_dang_nhap, mat_khau, ho_ten, dien_thoai, email, dia_chi)
+                            VALUE (?, ?, ?, ?, ?, ?); ';
+                $login_password = password_hash($login_password, PASSWORD_DEFAULT);
+                $params = [$login_name, $login_password, $user_name, $user_tel, $user_email, $user_address];
+                if(executeQuery($conn, $query, $params)) {
+                    echo "<script>
+                        alert('Đăng Ký Thành Công!');
+                        location.href = '".getRootUrl()."/login';
+                    </script>";                    
+                }
             }
         }
-    } else if(isset($_POST['login'])) {
+    } else if(getRequest('p', 'login')) {
         header("Location: ".getRootUrl()."/login");
     } else {
         if(!isset($have_access)) {

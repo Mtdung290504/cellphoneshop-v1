@@ -5,38 +5,32 @@
     = $login_password
     = '';
     
-    if(isset($_POST['signup'])) {
-        header("Location: ".getRootUrl()."signup");                                                                                                                                                                                                                                                                                                                             
-    } else if(isset($_POST['login'])) {
-        $login_name = $_POST['login_name'];
-        $login_password = $_POST['login_password'];
+    if(getRequest('p', 'signup')) {
+        header("Location: ".getRootUrl()."/signup");                                                                                                                                                                                                                                                                                               
+    } else if(getRequest('p', 'login')) {
+        $login_name = getRequest('p', 'login_name');
+        $login_password = getRequest('p', 'login_password');
         
-        $stmt = $conn->prepare('SELECT user_login_name FROM accounts WHERE user_login_name = ?');
+        $stmt = $conn->prepare('SELECT * FROM nguoidung WHERE ten_dang_nhap = ?');
         $stmt->bind_param("s", $login_name);
         $stmt->execute();
-        $rs = $stmt->get_result()->num_rows;
+        $rs = $stmt->get_result();
 
-        if($rs == 1) {
-            $stmt = $conn->prepare('SELECT user_login_name, user_login_password, user_name, is_admin FROM accounts WHERE user_login_name = ? AND user_login_password = ?');
-            $stmt->bind_param("ss", $login_name, $login_password);
-            $stmt->execute();
-            $stmt->store_result();
-            $rs = $stmt->num_rows;
-            if($rs == 1) {
-                $user_login_name = $user_login_password = $user_name = $is_admin = '';
-                $stmt->bind_result($user_login_name, $user_login_password, $user_name, $is_admin);
-                $stmt->fetch();
-                $_SESSION['user_login_name'] = $user_login_name;
-                $_SESSION['user_login_password'] = $user_login_password;
-                $_SESSION['user_name'] = $user_name;
-                $_SESSION['is_admin'] = $is_admin;
+        if($rs->num_rows == 1) {
+            $row = $rs->fetch_assoc();
+            $is_admin = $row['quyen_admin'];
+            $user_database_password = $row['mat_khau'];
+            if(password_verify($login_password, $user_database_password)) {
+                $_SESSION['user_login_name'] = $row['ten_dang_nhap'];
+                $_SESSION['user_login_password'] = $row['mat_khau'];
+                $_SESSION['user_name'] = $row['ho_ten'];
+                $_SESSION['is_admin'] = $row['quyen_admin'];
                 header('Location: '.getRootUrl());
-                exit;
             } else {
                 $error_login_password = "*Sai mật khẩu";
                 $login_password = '';
             }       
-        } else if($rs == 0) {
+        } else if($rs->num_rows == 0) {
             $error_login_name = "*Tên đăng nhập không tồn tại";
             $login_name = '';
             $login_password = '';

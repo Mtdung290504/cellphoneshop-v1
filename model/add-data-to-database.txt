@@ -311,30 +311,29 @@ unset($p);
 
 
 $s = new Specifications(
-"6.72 inches", 
-"IPS LCD", 
-"Camera chính 64 MP
-Camera phụ 2 MP", 
-"8 MP, f/2.0",
-"Helio G88", 
-"6 GB", 
-"128 GB", 
-"5000 MAh",
-"2 SIM (Nano-SIM)", 
+"6.67 inches", 
+"OLED", 
+"Camera chính góc rộng: 50 MP, 1/1.22\"Camera góc siêu rộng: 12 MPCamera Tele: 50 MP", 
+"20 MP",
+"Dimensity 9200+", 
+"12 GB", 
+"512 GB", 
+"5.000 mAh",
+"2 SIM (nano‑SIM và eSIM)", 
 "Android 13", 
-"1080 x 2400 pixels (FullHD+)", 
-"Tần số quét 90 Hz, 680 nits",
+"1220 x 2712 pixels", 
+"Màn OLED 1.5KTần số quét 144 Hz",
 );
 $p = new Phone(
-"realme C55 (6GB", 
-4990000, 
-5, 
-28,
-"Kiểu dáng hiện đại với các cạnh viền vuông vức và camera được bố trí độc đáo
-Thoả mãn niềm đam mê nhiếp ảnh với camera sau có độ phân giải lên đến 64MP
-Dung lượng pin 5.000 mAh kèm sạc nhanh 33W giúp tiết kiệm thời gian sạc pin
-RAM 6GB giúp xử lý tốt đa tác vụ cùng ROM 128GB cho không gian lưu trữ lớn", 
-["realme_c55_(6gb-1.jpg","realme_c55_(6gb-2.jpg","realme_c55_(6gb-3.jpg","realme_c55_(6gb-4.jpg","realme_c55_(6gb-5.jpg"], 
+"Xiaomi 13T Pro 5G (12GB - 512GB)", 
+16990000, 
+3, 
+20,
+"Nhiếp ảnh chuyên ngiệp, nắm giữ tuyệt tác trong tầm tay - Cụm camera đến, ống kính Leica với 2 phong cách ảnh
+Hiệu năng bất chấp mọi tác vụ - Bộ vi xử lý Dimensity 9200+ Ultra mạnh mẽ cùng RAM 12GB cho đa nhiệm mượt mà
+Năng lượng bất tận cả ngày - Pin 5000mAh cùng sạc nhanh 120W, sạc đầy chỉ trong 19 phút
+Màn hình sáng rực rỡ, cuộn lướt thật mượt mà - Màn hình 144hz cùng công nghệ AMOLED CrystalRes", 
+["xiaomi_13t_pro_5g_(12gb_-_512gb)-1.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-2.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-3.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-4.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-5.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-6.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-7.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-8.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-9.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-10.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-11.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-12.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-13.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-14.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-15.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-16.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-17.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-18.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-19.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-20.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-21.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-22.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-23.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-24.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-25.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-26.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-27.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-28.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-29.jpg"], 
 $s
 );
 add_phone($p);
