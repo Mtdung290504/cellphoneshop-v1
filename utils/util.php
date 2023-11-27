@@ -57,7 +57,6 @@
             throw new Exception("Lỗi trong quá trình thực thi truy vấn SQL.");
         }
     
-        $query = $statement->queryString;
         if (stripos($query, 'select') === 0) {
             $resultSet = $statement->get_result();
             $rows = [];

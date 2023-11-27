@@ -40,8 +40,7 @@ VALUES
     
 CREATE TABLE if not exists dienthoai(
     ma_dienthoai INT PRIMARY KEY AUTO_INCREMENT,
-    ten_dienthoai nvarchar(30) NOT NULL,
-    gia_nhap_dienthoai INT NOT NULL,
+    ten_dienthoai nvarchar(30) NOT NULL UNIQUE,
     gia_ban_dienthoai INT NOT NULL,
     giam_gia_dienthoai INT DEFAULT 0,
     mo_ta_dienthoai TEXT NOT NULL,
@@ -52,7 +51,7 @@ CREATE TABLE if not exists dienthoai(
     luot_danh_gia INT DEFAULT 0,
     luot_them_gio_hang INT DEFAULT 0,
     ma_hang INT NOT NULL,
-    FOREIGN KEY (ma_hang) REFERENCES hang(ma_hang)
+    FOREIGN KEY (ma_hang) REFERENCES hang_dienthoai(ma_hang)
 );
 
 CREATE TABLE if not exists anh_dienthoai(
@@ -74,6 +73,7 @@ CREATE TABLE if not exists nhap_dienthoai(
     ma_nhap INT PRIMARY KEY AUTO_INCREMENT,
     ma_dienthoai INT NOT NULL,
     ngay_nhap DATE NOT NULL,
+    gia_nhap INT DEFAULT NULL,
     so_luong_nhap INT NOT NULL,
     FOREIGN KEY (ma_dienthoai) REFERENCES dienthoai(ma_dienthoai)
 );

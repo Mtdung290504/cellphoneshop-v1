@@ -5,31 +5,69 @@ function getRightName(name) {
     }
     return name.trim();
 }
-function downImages(links, name, index = 0) {
-    if (index >= links.length) {
-        // Khi đã tải xuống và xử lý tất cả các ảnh
-        console.log('Hoàn thành tải xuống ảnh');
-        return;
+async function downImages(links, name) {
+    const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+    const arr_links = [];
+
+    for (let index = 0; index < links.length; index++) {
+        const link = links[index];
+        try {
+            const response = await fetch(link);
+            const blob = await response.blob();
+            const file = new File([blob], `${name}-${index + 1}.jpg`);
+            const url = URL.createObjectURL(file);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${name}-${index + 1}.jpg`;
+            arr_links.push(`${name}-${index + 1}.jpg`);
+            a.click();
+            URL.revokeObjectURL(url);
+        } catch (error) {
+            console.error(error);
+        }
+
+        // Đặt thời gian chờ giữa các tải xuống để tránh giới hạn của trình duyệt
+        await delay(100); // Chờ 0,2 giây (200 milliseconds) trước khi tải xuống ảnh tiếp theo
     }
 
-    const link = links[index];
-    fetch(link)
-        .then(response => response.blob())
-        .then(blob => {
-        const file = new File([blob], `${name}-${index + 1}.jpg`);
-        const url = URL.createObjectURL(file);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `${name}-${index + 1}.jpg`;
-        a.click();
-        URL.revokeObjectURL(url);
-
-        // Tiếp tục với ảnh tiếp theo sau khi đã tải xuống và xử lý xong
-        downImages(links, name, index + 1);
-        })
-        .catch(error => console.error(error));
+    // Khi đã tải xuống và xử lý tất cả các ảnh
+    console.log('Hoàn thành tải xuống ảnh');
+    console.log('số ảnh: '+arr_links.length);
+let spcV = phone.specifications;
+let spc = 
+`$s = new Specifications(
+"${spcV.screenSize}", 
+"${spcV.screenTechnology}", 
+"${spcV.behindCam}", 
+"${spcV.frontCam}",
+"${spcV.chipset}", 
+"${spcV.ram}", 
+"${spcV.internalMemory}", 
+"${spcV.pin}",
+"${spcV.sim}", 
+"${spcV.os}", 
+"${spcV.screenResolution}", 
+"${spcV.screenFeature}",
+);\n`;
+spc+=
+`$p = new Phone(
+"${phone.name}", 
+${Number(phone.price)}, 
+${Number(firms.indexOf(phone.firm) + 1)}, 
+${Number(phone.discount)},
+"${phone.decription}", 
+${JSON.stringify(arr_links)}, 
+$s
+);
+add_phone($p);
+unset($s);
+unset($p);`;
+console.log(spc);
+if(confirm('Xác nhận sao chép?')) {
+    window.navigator.clipboard.writeText(spc);
 }
-
+}
+let arr_links = [];
 let firms = ['Apple','Samsung','Xiaomi','OPPO','realme','vivo','Nokia','OnePlus','ASUS','Nubia','TECNO'];
 let phone = {
     name: '',
@@ -39,18 +77,18 @@ let phone = {
     decription: [],
     images: [],
     specifications: {
-        screenSize: '',
-        screenTechnology: '',
-        behindCam: '',
-        frontCam: '',
-        chipset: '',
-        ram: '',
-        internalMemory: '',
-        pin: '',
-        sim: '',
-        os: '',
-        screenResolution: '',
-        screenFeature: ''
+        screenSize: '-',
+        screenTechnology: '-',
+        behindCam: '-',
+        frontCam: '-',
+        chipset: '-',
+        ram: '-',
+        internalMemory: '-',
+        pin: '-',
+        sim: '-',
+        os: '-',
+        screenResolution: '-',
+        screenFeature: '-'
     }
 };
 let looptime;
@@ -65,15 +103,15 @@ looptime = firms.length;
     }
 let saleprice;
 try { 
-    saleprice = Number(document.querySelectorAll('p.tpt---sale-price')[1].textContent.trim().replace('đ', '').replaceAll('.','')); 
+    saleprice = Number(document.querySelector('.active.tpt-box .tpt---sale-price').textContent.trim().replace('đ', '').replaceAll('.','')); 
 } catch (error) {
-    saleprice = Number(document.querySelector('.product__price--show').textContent.trim().replace('₫', '').replaceAll('.',''));
+    saleprice = Number(document.querySelector('.box-detail-product__box-center.column .product__price--show').textContent.trim().replace('₫', '').replaceAll('.',''));
 }
 try {
     phone.price = Number(document.querySelector('.tpt---price').textContent.trim().replace('đ', '').replaceAll('.',''));
 } catch (error) {
     try {
-        phone.price = Number(document.querySelector('.product__price--through').textContent.trim().replace('₫', '').replaceAll('.','')); 
+        phone.price = Number(document.querySelector('.box-detail-product__box-center.column .product__price--through').textContent.trim().replace('₫', '').replaceAll('.','')); 
     } catch (e) {
         phone.price = saleprice;
     }
@@ -82,6 +120,7 @@ phone.discount = parseInt(100*(phone.price - saleprice)/phone.price);
 let decription_html = document.querySelectorAll('div.desktop ul li');
 looptime = decription_html.length;
 for(let i=0;i<looptime;i++){phone.decription.push(decription_html[i].textContent.trim())}
+phone.decription = phone.decription.join('\n');
 
 let images = document.querySelectorAll('a.spotlight img');
 let firstImage = document.querySelector('.box-ksp img').src;
@@ -129,5 +168,4 @@ if(firms.indexOf(phone.firm)==-1) {
     }
     if(firms.indexOf(phone.firm)==-1) {alert('Bỏ sản phẩm này')}
 }
-
 console.log(phone);

@@ -1,7 +1,12 @@
 <?php
-$var = $_POST['alo'];
-print_r(preg_split("/\r\n|\n|\r/", $var)) ;
-echo $var;
+require_once(__DIR__.'/../model/database.php');
+// if(isset($_POST['alo'])) {
+//     $conn->query('insert into testtext(mydata) value ("'.$_POST['alo'].'")');
+// }
+$result = $conn->query('select * from testtext');
+while($row = $result->fetch_assoc()) {
+    print_r(preg_split("/\r\n|\n|\r/",$row['mydata']));
+}
 ?>
 
 <!DOCTYPE html>
