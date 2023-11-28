@@ -1,8 +1,5 @@
-body {
-    background-color: #EEE;
-}
 .container form {
-    background-color: white;
+    border: 1px solid black;
     width: 680px;
     /* border: 1px solid; */
     padding: 40px 80px;
@@ -55,4 +52,8 @@ body {
     width: 100%;
     cursor: pointer;
     border: none;
+}
+
+.container form textarea {
+    resize: vertical;
 }

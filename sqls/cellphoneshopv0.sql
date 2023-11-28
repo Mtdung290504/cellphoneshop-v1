@@ -40,7 +40,7 @@ VALUES
     
 CREATE TABLE if not exists dienthoai(
     ma_dienthoai INT PRIMARY KEY AUTO_INCREMENT,
-    ten_dienthoai nvarchar(30) NOT NULL UNIQUE,
+    ten_dienthoai nvarchar(100) NOT NULL UNIQUE,
     gia_ban_dienthoai INT NOT NULL,
     giam_gia_dienthoai INT DEFAULT 0,
     mo_ta_dienthoai TEXT NOT NULL,
@@ -136,3 +136,19 @@ CREATE TABLE if not exists giohang(
     FOREIGN KEY (ma_dienthoai) REFERENCES dienthoai(ma_dienthoai),
     so_luong INT NOT NULL
 );
+
+CREATE TABLE if not exists slide(
+    ma_anh INT PRIMARY KEY AUTO_INCREMENT,
+    link_anh varchar(200) NOT NULL
+);
+
+INSERT INTO slide (link_anh) 
+VALUES
+    ('slide1.png'),
+    ('slide2.png'),
+    ('slide3.png'),
+    ('slide4.png'),
+    ('slide5.png'),
+    ('slide6.png'),
+    ('slide7.png'),
+    ('slide8.png');

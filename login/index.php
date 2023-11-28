@@ -3,7 +3,7 @@
     require_once(__DIR__.'/../utils/util.php');
     require_once(__DIR__.'/../model/database.php');
     require_once(__DIR__.'/../view/header.php');
-    if(getRequest('s','user_login_name') && getRequest('s', 'user_login_password')) {
+    if(isLoggedIn()) {
         header('Location: '.getRootUrl());
     }
     $have_access = true;

@@ -1,6 +1,8 @@
 <?php
 include('database.php');
-
+include('classes.php');
+include('manage_functions.php');
+include('../utils/util.php');
 
 $s = new Specifications(
 "6.1 inches", 
@@ -26,7 +28,7 @@ Lớp phủ oleophobia chống dấu vân tay
 Mặt kính cảm ứng: Kính cường lực Ceramic Shield",
 );
 $p = new Phone(
-"iPhone 15 128GB | Chính hãng VN/A", 
+"iPhone 15 128GB | Chính hãng VN/A",
 22990000, 
 1, 
 6,

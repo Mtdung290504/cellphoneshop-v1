@@ -1,7 +1,10 @@
 <?php 
     session_start();
     require_once('utils/util.php');
+    require_once('model/classes.php');
+    require_once('model/user_functions.php');
     require_once('model/database.php');
     require_once('view/header.php');
+    require_once('home/index.php');
     require_once('view/footer.php');
 ?>

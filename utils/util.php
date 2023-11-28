@@ -64,10 +64,24 @@
                 $rows[] = $row;
             }
             $statement->close();
-            return $rows;
+            return (count($rows)>0) ? $rows : null;
         } else {
             $statement->close();
             return true;
         }
+    }
+
+    function isLoggedIn() {
+        return (getRequest('s', 'user_login_name') && getRequest('s', 'user_login_password'));
+    }
+
+    function filterImageName(string $name) {
+        return str_replace(array('/', '|'), '_',$name);
+    }
+
+    function getDiscountedPrice($price, $discount) {
+        $price = $price - $price*$discount/100;
+        $price = $price - $price%10000;
+        return $price;
     }
 ?>
