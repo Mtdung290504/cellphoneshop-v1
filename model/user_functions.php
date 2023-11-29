@@ -11,6 +11,19 @@
         setcookie('cart', $cartJson, time() + (365 * 24 * 60 * 60), '/');   
     }
 
+    function find_from_cookie_cart(int $phone_id) {
+        $rs = false;
+        if(isset($_COOKIE['cart'])) {
+            $cart = json_decode($_COOKIE['cart'], true);
+            foreach ($cart as &$item) {
+                if ($item[0] === $phone_id) {
+                    return true;
+                }
+            }
+        }
+        return $rs;
+    }
+
     function update_cookie_cart(int $phone_id, int $phone_count) {
         $cart = isset($_COOKIE['cart']) ? json_decode($_COOKIE['cart'], true) : [];
         $found = false;

@@ -3,7 +3,7 @@
     }
     if(getRequest('g', 'page')) {
     }
-    $list_phone_data = executeQuery($conn, "SELECT * FROM dienthoai");
+    $list_phone_data = executeQuery($conn, "SELECT * FROM dienthoai ORDER BY ma_dienthoai DESC");
     $list_phone_display = [];
     foreach ($list_phone_data as $value) {
         $new_phone = new Phone_preview(
@@ -22,7 +22,7 @@
         $rs = executeQuery($conn, "SELECT * FROM giohang WHERE ma_nguoidung = ?", [getRequest('s', 'user_id')]);
         $cart_count = ($rs==null) ? 0 : count($rs);
     } else {
-        $cart_cookie = json_decode(getRequest('c', 'cart'));
+        $cart_cookie = json_decode(getRequest('c', 'cart'), true);
         if($cart_cookie) {
             $cart_count = count($cart_cookie);
         }

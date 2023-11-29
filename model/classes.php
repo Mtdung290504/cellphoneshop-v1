@@ -40,6 +40,23 @@
             $this->screen_resolution = $screen_resolution;
             $this->screen_feature = $screen_feature;
         }
+
+        public function toArray() {
+            return [
+                $this->screen_size,
+                $this->screen_technology,
+                $this->behind_cam,
+                $this->front_cam,
+                $this->chipset,
+                $this->ram,
+                $this->internal_memory,
+                $this->pin,
+                $this->sim,
+                $this->os,
+                $this->screen_resolution,
+                $this->screen_feature
+            ];
+        }
     }
     
     class Phone {
@@ -92,6 +109,16 @@
             $this->price = $price;
             $this->discount = $discount;
             $this->stars = $stars;
+        }
+    }
+
+    class User_rate_and_comment {
+        public int $rate;
+        public array $comments;
+
+        public function __construct(int $rate, array $comments) {
+            $this->rate = $rate;
+            $this->comments = $comments;
         }
     }
 ?>

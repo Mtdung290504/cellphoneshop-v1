@@ -16,6 +16,15 @@ if(isLoggedIn()) {
                 $phone_count = getRequest('p', 'phone_count');
                 update_db_cart(getRequest('s','user_id'), $phone_id, $phone_count);
                 break;
+            case 'add':
+                $phone_id = getRequest('p', 'phone_id');
+                $mess = "Sản phẩm đã có trong giỏ hàng rồi!";
+                if(executeQuery($conn, "SELECT*FROM giohang WHERE ma_dienthoai = ?", [$phone_id]) == null) {
+                    update_db_cart(getRequest('s','user_id'), $phone_id);
+                    $mess = "Đã thêm sản phẩm vào giỏ hàng";
+                }
+                echo $mess;
+                break;
         }
     }   
 } else {
@@ -30,6 +39,15 @@ if(isLoggedIn()) {
                 $phone_id = getRequest('p', 'phone_id');
                 $phone_count = getRequest('p', 'phone_count');
                 update_cookie_cart($phone_id, $phone_count);
+                break;
+            case 'add':
+                $phone_id = getRequest('p', 'phone_id');
+                $mess = "Sản phẩm đã có trong giỏ hàng rồi!";
+                if(find_from_cookie_cart($phone_id)==false) {
+                    update_cookie_cart($phone_id, 1);
+                    $mess = "Đã thêm sản phẩm vào giỏ hàng";
+                }
+                echo $mess;
                 break;
         }
     }

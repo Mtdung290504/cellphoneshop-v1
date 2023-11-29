@@ -54,7 +54,7 @@
             <div class="product-name"><?php echo $phone->name?></div>
             <div class="product-price">
                 <span class="main-price"><?php echo number_format(getDiscountedPrice($phone->price, $phone->discount), 0, ',', '.')?>đ</span>
-                <span class="price"><?php echo number_format($phone->price)?>đ</span>
+                <span class="price"><?php echo number_format($phone->price, 0, ',', '.')?>đ</span>
             </div>
             <div class="product-rating">
                 <span class="star-wrapper">
@@ -71,7 +71,7 @@
 </div>
 
 
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script src="<?php echo getRootUrl().'assets/scripts2/swiper-bundle.min.js'?>"></script>
 <script>
     var swiper = new Swiper('.swiper-container', {
     // Cấu hình tùy chọn của Swiper.js

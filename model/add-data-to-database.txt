@@ -308,40 +308,6 @@ $s
 add_phone($p);
 unset($s);
 unset($p);
-
-
-
-
-$s = new Specifications(
-"6.67 inches", 
-"OLED", 
-"Camera chính góc rộng: 50 MP, 1/1.22\"Camera góc siêu rộng: 12 MPCamera Tele: 50 MP", 
-"20 MP",
-"Dimensity 9200+", 
-"12 GB", 
-"512 GB", 
-"5.000 mAh",
-"2 SIM (nano‑SIM và eSIM)", 
-"Android 13", 
-"1220 x 2712 pixels", 
-"Màn OLED 1.5KTần số quét 144 Hz",
-);
-$p = new Phone(
-"Xiaomi 13T Pro 5G (12GB - 512GB)", 
-16990000, 
-3, 
-20,
-"Nhiếp ảnh chuyên ngiệp, nắm giữ tuyệt tác trong tầm tay - Cụm camera đến, ống kính Leica với 2 phong cách ảnh
-Hiệu năng bất chấp mọi tác vụ - Bộ vi xử lý Dimensity 9200+ Ultra mạnh mẽ cùng RAM 12GB cho đa nhiệm mượt mà
-Năng lượng bất tận cả ngày - Pin 5000mAh cùng sạc nhanh 120W, sạc đầy chỉ trong 19 phút
-Màn hình sáng rực rỡ, cuộn lướt thật mượt mà - Màn hình 144hz cùng công nghệ AMOLED CrystalRes", 
-["xiaomi_13t_pro_5g_(12gb_-_512gb)-1.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-2.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-3.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-4.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-5.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-6.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-7.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-8.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-9.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-10.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-11.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-12.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-13.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-14.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-15.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-16.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-17.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-18.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-19.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-20.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-21.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-22.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-23.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-24.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-25.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-26.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-27.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-28.jpg","xiaomi_13t_pro_5g_(12gb_-_512gb)-29.jpg"], 
-$s
-);
-add_phone($p);
-unset($s);
-unset($p);
-
 ?>
 
 

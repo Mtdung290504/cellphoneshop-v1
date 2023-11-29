@@ -84,4 +84,27 @@
         $price = $price - $price%10000;
         return $price;
     }
+
+    function renderStars($starCount) {
+        $result = '';
+      
+        $fullStars = floor($starCount);
+        for ($i = 0; $i < $fullStars; $i++) {
+          $result .= '<i class="fas fa-star"></i>';
+        }
+      
+        $decimal = $starCount - $fullStars;
+        if ($decimal >= 0.5) {
+          $result .= '<i class="fas fa-star-half-alt"></i>';
+        } else if ($decimal > 0 && $decimal < 0.5) {
+          $result .= '<i class="far fa-star"></i>';
+        }
+
+        $emptyStars = 5 - ceil($starCount);
+        for ($i = 0; $i < $emptyStars; $i++) {
+          $result .= '<i class="far fa-star"></i>';
+        }
+      
+        return $result;
+      }
 ?>

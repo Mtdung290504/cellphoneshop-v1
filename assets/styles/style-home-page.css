@@ -218,6 +218,7 @@ body {
     max-height: 40px;
     margin-bottom: 25px;
     font-weight: bold;
+    font-size: 18px;
   }
   
   .product-grid .product-item .product-price {
