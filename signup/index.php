@@ -4,7 +4,8 @@
     require_once(__DIR__.'/../model/database.php');
     require_once(__DIR__.'/../view/header.php');
     if(isLoggedIn()) {
-        header('Location: '.getRootUrl());
+        echo '<script>window.history.back();</script>';
+        exit();
     }
     $have_access = true;
     require_once('signup_handling.php');

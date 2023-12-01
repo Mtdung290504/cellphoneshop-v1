@@ -49,7 +49,6 @@ CREATE TABLE if not exists dienthoai(
     luot_xem INT DEFAULT 0,
     luot_binh_luan INT DEFAULT 0,
     luot_danh_gia INT DEFAULT 0,
-    luot_them_gio_hang INT DEFAULT 0,
     ma_hang INT NOT NULL,
     FOREIGN KEY (ma_hang) REFERENCES hang_dienthoai(ma_hang)
 );

@@ -5,8 +5,8 @@ body {
 }
 
 .menu {
-  position: static;
-  top: 0;
+  position: sticky;
+  top: -.1px;
   background-color: #222;
   color: white;
   z-index: 1000;
@@ -49,7 +49,7 @@ body {
 
 .menu .menu-list .menu-item .submenu li {
   list-style: none;
-  padding: 15px;
+  padding: 10px 15px;
 }
 
 .menu .menu-list .menu-item .submenu li a {
@@ -171,6 +171,7 @@ body {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-gap: 10px;
+    min-height: 40vh;
   }
   
   .product-grid .product-item {
@@ -242,8 +243,14 @@ body {
     align-items: center;
     margin-top: 15px;
     margin-bottom: 10px;
+    min-height: 24px;
   }
   
+  .product-grid .product-item .product-rating .none-star {
+    color: gray;
+    font-size: 15px;
+  }
+
   .product-grid .product-item .product-rating .star-wrapper {
     display: inline-block;
     font-size: 20px;

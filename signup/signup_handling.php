@@ -42,15 +42,18 @@
                     echo "<script>
                         alert('Đăng Ký Thành Công!');
                         location.href = '".getRootUrl()."/login';
-                    </script>";                    
+                    </script>";  
+                    exit();                  
                 }
             }
         }
     } else if(getRequest('p', 'login')) {
         header("Location: ".getRootUrl()."/login");
+        exit();
     } else {
         if(!isset($have_access)) {
-            header('Location: '.getRootUrl());
+            echo '<script>window.history.back();</script>';
+            exit();
         }
     }
     

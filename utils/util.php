@@ -87,22 +87,27 @@
 
     function renderStars($starCount) {
         $result = '';
+        $id_star = 1;
       
         $fullStars = floor($starCount);
         for ($i = 0; $i < $fullStars; $i++) {
-          $result .= '<i class="fas fa-star"></i>';
+          $result .= '<i class="fas fa-star" data-value="'.$id_star.'"></i>';
+          $id_star++;
         }
       
         $decimal = $starCount - $fullStars;
         if ($decimal >= 0.5) {
-          $result .= '<i class="fas fa-star-half-alt"></i>';
+          $result .= '<i class="fas fa-star-half-alt" data-value="'.$id_star.'"></i>';
+          $id_star++;
         } else if ($decimal > 0 && $decimal < 0.5) {
-          $result .= '<i class="far fa-star"></i>';
+          $result .= '<i class="far fa-star" data-value="'.$id_star.'"></i>';
+          $id_star++;
         }
 
         $emptyStars = 5 - ceil($starCount);
         for ($i = 0; $i < $emptyStars; $i++) {
-          $result .= '<i class="far fa-star"></i>';
+          $result .= '<i class="far fa-star" data-value="'.$id_star.'"></i>';
+          $id_star++;
         }
       
         return $result;

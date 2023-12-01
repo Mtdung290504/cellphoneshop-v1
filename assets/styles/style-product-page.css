@@ -53,6 +53,9 @@ product-page .ctn .left .rating-box .star-wrapper {
     font-size: 24px;
     color: gold;
 }
+product-page .ctn .left .rating-box.phone-rating-box .star-wrapper .fa-star{
+    cursor: pointer;
+}
 product-page .ctn .left .rating-box .rating-count {
     margin-left: 15px;
     font-weight: bold;

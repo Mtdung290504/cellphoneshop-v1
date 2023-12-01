@@ -16,3 +16,31 @@ function formatMoney(amount) {
 
     return finalStr;
 }
+
+function renderStars(starCount) {
+    let result = '';
+    let id_star = 1;
+  
+    const fullStars = Math.floor(starCount);
+    for (let i = 0; i < fullStars; i++) {
+      result += `<i class="fas fa-star" data-value="${id_star}"></i>`;
+      id_star++;
+    }
+  
+    const decimal = starCount - fullStars;
+    if (decimal >= 0.5) {
+      result += `<i class="fas fa-star-half-alt" data-value="${id_star}"></i>`;
+      id_star++;
+    } else if (decimal > 0 && decimal < 0.5) {
+      result += `<i class="far fa-star" data-value="${id_star}"></i>`;
+      id_star++;
+    }
+  
+    const emptyStars = 5 - Math.ceil(starCount);
+    for (let i = 0; i < emptyStars; i++) {
+      result += `<i class="far fa-star" data-value="${id_star}"></i>`;
+      id_star++;
+    }
+  
+    return result;
+  }

@@ -22,7 +22,7 @@
             </div>
             </div>
             <h3 style="margin: 10px; font-size: 24px;">Đánh giá</h3>
-            <div class="rating-box">
+            <div class="rating-box phone-rating-box">
                 <span class="star-wrapper">
                     <?php echo renderStars($phone_rate)?>
                 </span>
@@ -30,27 +30,26 @@
             </div>
             <div class="comment-box">
                 <h3>Bình luận (<?php echo $comment_count?>)</h3>
-                <form action="" method="post">
-                    <textarea name="comment" row="5" col="15" placeholder="Bình luận..."></textarea>
-                    <input type="submit" value="Gửi">
+                <form id="comment-form" action="" method="post">
+                    <textarea name="comment-content" required row="5" col="15" placeholder="Bình luận..."></textarea>
+                    <input type="hidden" name="product_id" value=<?php echo getRequest('g', 'product_id')?>>
+                    <input name="submit-comment" type="submit" value="Gửi">
                 </form>
                 <div class="comments">
-                    <?php foreach ($user_rates_and_comments as $key => $value) {
-                            $user_name = executeQuery($conn, "SELECT ho_ten FROM nguoidung WHERE ma_nguoidung = ?", [$key])[0]['ho_ten'];
+                    <?php foreach ($user_rates_and_comments as $value) {
+                            $user_name = executeQuery($conn, "SELECT ho_ten FROM nguoidung WHERE ma_nguoidung = ?", [$value->user_id])[0]['ho_ten'];
                             if(!$user_name) {$user_name = "Người dùng ẩn danh";}
-                            $user_rate = $value->rate;
-                            foreach ($value->comments as $subvalue) {
                         ?>
                         <div class="comment">
                             <span class="user-name-container">
                                 <span class="user-name"><?php echo $user_name?></span>
                                 <div class="rating-box">
-                                    <?php echo $user_rate!=0 ? '<div class="star-wrapper">'.renderStars($user_rate).'</div>' : 'Chưa đánh giá';?>
+                                    <?php echo ($value->rate != null) ? '<div class="star-wrapper">'.renderStars($value->rate).'</div>' : 'Chưa đánh giá';?>
                                 </div>
                             </span>
-                            <span class="comment-content"><?php echo nl2br($subvalue)?></span>
+                            <span class="comment-content"><?php echo nl2br($value->comment)?></span>
                         </div>
-                    <?php }}?>
+                    <?php }?>
                 </div>
             </div>
         </div>
@@ -72,8 +71,11 @@
                 <span class="price"><?php echo number_format($phone_info->price, 0, ',', '.')?>đ</span>
             </div>
             <div class="button-block">
-                <a href="javascript:void(0);" class="button">Đặt hàng</a>
-                <a href="javascript:void(0);" class="button" id="add-to-cart-btn">Thêm vào giỏ hàng</a>
+                <?php echo ($phone_info_data['ton_kho'] != 0)
+                    ? '<a href="javascript:void(0);" class="button">Đặt hàng</a>'
+                        .'<a href="javascript:void(0);" class="button" id="add-to-cart-btn">Thêm vào giỏ hàng</a>'
+                    : '<a style="cursor: block; background-color: red;" class="button">Hết hàng</a>'
+                ?>
             </div>
             <div class="spc-block">
                 <h3>Thông số kỹ thuật</h3>
@@ -110,10 +112,14 @@
 <script>
     document.addEventListener("DOMContentLoaded", function() {
       var addButton = document.querySelector('#add-to-cart-btn');
-      
+      var starsContainer = document.querySelector('.phone-rating-box .star-wrapper');
+      var commentForm = document.querySelector('form#comment-form');
+
+      //Xử lý sự kiện thêm giỏ hàng
+      if(addButton) {
         addButton.addEventListener("click", function() {
             var productId = <?php echo getRequest('g', 'product_id')?>;
-            // Gửi yêu cầu xóa sản phẩm bằng Ajax
+            // Gửi yêu cầu thêm sản phẩm bằng Ajax
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "<?php echo getRootUrl()?>cart/cart_process.php", true);
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -124,28 +130,99 @@
             };
             xhr.send('action=add&phone_id='+productId);
         });
+      }
 
-    //   var debounceTimeout;
-    //   function handleInputChange(event) {
-    //       clearTimeout(debounceTimeout);
-    //       debounceTimeout = setTimeout(function() {
-    //         var inputValue = event.target.value;
-    //         var productItem = event.target.closest(".product-item");
-    //         var productId = productItem.dataset.product_id;console.log(productId);
-    //         // Gửi yêu cầu xóa sản phẩm bằng Ajax
-    //         var xhr = new XMLHttpRequest();
-    //         xhr.open("POST", "<?php echo getRootUrl()?>cart/cart_process.php", true);
-    //         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    //         xhr.onreadystatechange = function() {
-    //         };
-    //         xhr.send('action=update&phone_id='+productId+'&phone_count='+inputValue);
-    //         console.log('action=update&phone_id='+productId+'&phone_count='+inputValue);
-    //       }, 300); // Thời gian chờ debounce (ms)
-    //   }
+      //Xử lý form bình luận
+      commentForm.addEventListener('submit', function(event) {
+        if('<?php echo isLoggedIn()?>') {
+        } else {
+            event.preventDefault();
+            if(confirm('Bạn có muốn đăng nhập để bình luận?')) {
+                window.location = "<?php echo getRootUrl()?>login";
+            }
+        }
+      });
 
-    //   for (let i=0; i<numberInputs.length; i++) {
-    //       numberInputs[i].addEventListener("change", handleInputChange);
-    //       numberInputs[i].addEventListener("change", updateTotalPrice);
-    //   }
+      //Xử lý đánh giá
+        var debounceTimeout;
+        function starClick(event) {
+            if('<?php echo isLoggedIn()?>') {
+                clearTimeout(debounceTimeout);
+                    debounceTimeout = setTimeout(function() {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", "<?php echo getRootUrl()?>product/index.php", true);
+                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    xhr.onreadystatechange = function() {
+                        if(xhr.readyState === 4 && xhr.status === 200) {
+                            let res = JSON.parse(xhr.responseText);
+                            resetStars(res[0]);
+                            resetDisplayCount(res[0], res[1]);
+                        }
+                    };
+                    xhr.send(`action=rate&phone_id=${<?php echo getRequest('g', 'product_id')?>}&value=${event.target.dataset.value}`); 
+                }, 300);               
+            } else {
+                if(confirm('Bạn có muốn đăng nhập để đánh giá?')) {
+                    window.location = "<?php echo getRootUrl()?>login";
+                }
+            }
+        }
+
+        function addStarEvent() {
+            stars = starsContainer.querySelectorAll('i');
+            stars.forEach(star => {
+                star.addEventListener('mouseover', function() {
+                    let idHoverStar = this.dataset.value;
+                    stars.forEach(substar => {
+                        let idStar = substar.dataset.value;
+                        if (idStar <= idHoverStar) {
+                            substar.classList.remove('far');
+                            substar.classList.remove('fa-star-half-alt');
+                            substar.classList.add('fas');
+                            substar.classList.add('fa-star');
+                        } else {
+                            substar.classList.remove('fas');
+                            substar.classList.remove('fa-star-half-alt');
+                            substar.classList.add('fa-star');
+                            substar.classList.add('far');
+                        }
+                    });
+                });
+                star.addEventListener('mouseout', function() {
+                    starsContainer.innerHTML = '<?php echo renderStars($phone_rate)?>';
+                    addStarEvent();
+                });
+                star.addEventListener('click', starClick);
+            });
+        }
+        addStarEvent();
+
+        function resetStars(new_rate) {
+            starsContainer.innerHTML = renderStars(new_rate);
+            stars = starsContainer.querySelectorAll('i');
+            stars.forEach(star => {
+                star.addEventListener('mouseover', function() {
+                    let idHoverStar = this.dataset.value;
+                    stars.forEach(substar => {
+                        let idStar = substar.dataset.value;
+                        if (idStar <= idHoverStar) {
+                            substar.classList.remove('far');
+                            substar.classList.add('fas');
+                        } else {
+                            substar.classList.remove('fas');
+                            substar.classList.add('far');
+                        }
+                    });
+                });
+                star.addEventListener('mouseout', function() {
+                    starsContainer.innerHTML = renderStars(new_rate);
+                    addStarEvent();
+                });
+                star.addEventListener('click', starClick);
+            });
+        }
+        function resetDisplayCount(new_rate, new_rate_count) {
+            document.querySelector('.rating-count').innerHTML = `${new_rate}/5 - ${new_rate_count!=0 ? new_rate_count+" Lượt đánh giá" : "Chưa có lượt đánh giá"}`;
+        }
     });
 </script>

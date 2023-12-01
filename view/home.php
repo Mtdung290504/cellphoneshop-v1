@@ -3,9 +3,9 @@
         <li class="menu-item">
             <a>Hãng điện thoại</a>
             <ul class="submenu">
-                <li><a href="#">Subitem 1.1</a></li>
-                <li><a href="#">Subitem 1.2</a></li>
-                <li><a href="#">Subitem 1.3</a></li>
+                <?php foreach ($list_firm_data as $value) {?>
+                    <li><a href="<?php echo getRootUrl().'?firm='.$value['ma_hang']?>"><?php echo $value['ten_hang']?></a></li>
+                <?php }?>
             </ul>
         </li>
 
@@ -38,9 +38,9 @@
 <div class="choose-box">
     <p>Sắp xếp theo</p>
     <select>
-        <option>-</option>
-        <option>1Tùy chọn 1</option>
-        <option>1</option>
+        <option>Mới nhất</option>
+        <option>Tùy chọn 1</option>
+        <option>Tùy chọn 2</option>
     </select>
 </div>
 
@@ -50,21 +50,19 @@
             <div class="product-image">
                 <img src="<?php echo getRootUrl().'/assets/images/product-images/'.filterImageName($phone->thumbnail_image)?>" alt="<?php echo filterImageName($phone->thumbnail_image)?>">
             </div>
-            <div class="product-status <?php echo ($product_status) ? '' : 'no' ?>"><?php echo $product_status?></div>
+            <div class="product-status <?php echo ($phone->status) ? '' : 'no' ?>"><?php echo $phone->status?></div>
             <div class="product-name"><?php echo $phone->name?></div>
             <div class="product-price">
                 <span class="main-price"><?php echo number_format(getDiscountedPrice($phone->price, $phone->discount), 0, ',', '.')?>đ</span>
                 <span class="price"><?php echo number_format($phone->price, 0, ',', '.')?>đ</span>
             </div>
             <div class="product-rating">
-                <span class="star-wrapper">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i> <!--far là sao rỗng-->
-                <i class="fas fa-star-half-alt"></i>
-                <i class="far fa-star"></i>
-                </span>
-                <span class="rating">3.5</span>
+                <?php if($phone->stars != 0) {?>
+                    <span class="star-wrapper">
+                        <?php echo renderStars($phone->stars)?>
+                    </span>
+                    <span class="rating"><?php echo $phone->stars.'/5'?></span>
+                <?php } else{echo '<span class="none-star">Chưa có lượt đánh giá</span>';}?>
             </div>
         </a></div>
     <?php } ?>

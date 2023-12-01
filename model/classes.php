@@ -94,6 +94,7 @@
         public int $price;
         public int $discount;
         public float $stars;
+        public string $status;
     
         public function __construct(
             int $id, 
@@ -101,7 +102,8 @@
             string $name, 
             int $price, 
             int $discount, 
-            float $stars
+            float $stars,
+            string $status
         ) {
             $this->id = $id;
             $this->thumbnail_image = $thumbnail_image;
@@ -109,16 +111,19 @@
             $this->price = $price;
             $this->discount = $discount;
             $this->stars = $stars;
+            $this->status = $status;
         }
     }
 
     class User_rate_and_comment {
+        public int $user_id;
         public int $rate;
-        public array $comments;
+        public string $comment;
 
-        public function __construct(int $rate, array $comments) {
+        public function __construct(int $user_id, int $rate, string $comment) {
+            $this->user_id = $user_id;
             $this->rate = $rate;
-            $this->comments = $comments;
+            $this->comment = $comment;
         }
     }
 ?>

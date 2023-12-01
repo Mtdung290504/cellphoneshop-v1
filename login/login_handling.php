@@ -26,7 +26,8 @@
                 $_SESSION['user_login_password'] = $row['mat_khau'];
                 $_SESSION['user_name'] = $row['ho_ten'];
                 $_SESSION['is_admin'] = $row['quyen_admin'];
-                header('Location: '.getRootUrl());
+                echo '<script>window.history.back();</script>';
+                exit();
             } else {
                 $error_login_password = "*Sai mật khẩu";
                 $login_password = '';
@@ -38,7 +39,8 @@
         }
     } else {
         if(!isset($have_access)) {
-            header('Location: '.getRootUrl());
+            echo '<script>window.history.back();</script>';
+            exit();
         }
     }
 ?>

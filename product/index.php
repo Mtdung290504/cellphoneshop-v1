@@ -1,16 +1,52 @@
 <?php
-
-use Illuminate\Support\Arr;
-
+    session_start();
     require_once __DIR__.'/../utils/util.php';
-    require_once __DIR__.'/../view/header.php';
     require_once __DIR__.'/../model/database.php';
     require_once __DIR__.'/../model/classes.php';
-    $phone_info_data = executeQuery($conn, "SELECT*FROM dienthoai WHERE ma_dienthoai = ?", [getRequest('g', 'product_id')])[0];
-    $phone_images_data = executeQuery($conn, "SELECT link_anh FROM anh_dienthoai WHERE ma_dienthoai = ?", [getRequest('g', 'product_id')]);
-    $phone_spc_data = executeQuery($conn, "SELECT*FROM thong_so_ky_thuat_dienthoai WHERE ma_dienthoai = ? ORDER BY ma_thong_so", [getRequest('g', 'product_id')]);
-    $phone_rate_data = executeQuery($conn, "SELECT*FROM danhgia WHERE ma_dienthoai = ?", [getRequest('g', 'product_id')]);
-    $phone_comment_data = executeQuery($conn, "SELECT*FROM binhluan WHERE ma_dienthoai = ?", [getRequest('g', 'product_id')]);
+    require_once __DIR__.'/../model/user_functions.php';
+
+    //Xử lý bình luận và đánh giá sản phẩm
+    if(getRequest('p', 'action') == 'rate') {
+        $user_req_id = getRequest('s', 'user_id');
+        if($user_req_id) {
+            $luot_danhgia_moi =  user_do_rate($user_req_id, getRequest('p', 'phone_id'), getRequest('p', 'value'));
+            $new_phone_rate = 0;
+            $new_phone_rate_data = executeQuery($conn, "SELECT*FROM danhgia WHERE ma_dienthoai = ?", [getRequest('p', 'phone_id')]);
+            if($new_phone_rate_data!=null) {
+                foreach ($new_phone_rate_data as $value) {
+                    $new_phone_rate += $value['gia_tri'];
+                }
+                $new_phone_rate /= count($new_phone_rate_data);
+            }
+            $new_phone_rate = round($new_phone_rate, 1);
+            header("Content-Type: application/json");
+            echo json_encode([$new_phone_rate, $luot_danhgia_moi]);
+            exit();
+        } else {
+            exit();
+        }
+    }
+    if(getRequest('p', 'submit-comment')) {
+        $user_req_id = getRequest('s', 'user_id');
+        if($user_req_id) {
+            user_do_comment($user_req_id, getRequest('p', 'product_id'), getRequest('p', 'comment-content'));
+        }
+        $currentURL = $_SERVER['REQUEST_URI'];
+        header("Location: $currentURL");
+        exit();
+    }
+
+    require_once __DIR__.'/../view/header.php';
+    //Tăng lượt xem
+    $product_id = getRequest('g', 'product_id');
+    $luot_xem_goc = executeQuery($conn, "SELECT luot_xem FROM dienthoai WHERE ma_dienthoai = ?", [$product_id])[0]['luot_xem'];
+    executeQuery($conn, "UPDATE dienthoai SET luot_xem = ? WHERE ma_dienthoai = ?", [$luot_xem_goc+1, $product_id]);
+
+    $phone_info_data = executeQuery($conn, "SELECT*FROM dienthoai WHERE ma_dienthoai = ?", [$product_id])[0];
+    $phone_images_data = executeQuery($conn, "SELECT link_anh FROM anh_dienthoai WHERE ma_dienthoai = ?", [$product_id]);
+    $phone_spc_data = executeQuery($conn, "SELECT*FROM thong_so_ky_thuat_dienthoai WHERE ma_dienthoai = ? ORDER BY ma_thong_so", [$product_id]);
+    $phone_rate_data = executeQuery($conn, "SELECT*FROM danhgia WHERE ma_dienthoai = ?", [$product_id]);
+    $phone_comment_data = executeQuery($conn, "SELECT*FROM binhluan WHERE ma_dienthoai = ?", [$product_id]);
     $phone_spc_title_data = executeQuery($conn, "SELECT ten_thong_so FROM thong_so_ky_thuat ORDER BY ma_thong_so");
 
     $phone_spc;
@@ -25,8 +61,6 @@ use Illuminate\Support\Arr;
     if($phone_rate_data!=null) {
         foreach ($phone_rate_data as $value) {
             $phone_rate += $value['gia_tri'];
-            $user = new User_rate_and_comment($value['gia_tri'], []);
-            $user_rates_and_comments[$value['ma_nguoidung']] = $user;
         }
         $phone_rate /= count($phone_rate_data);
     }
@@ -34,13 +68,12 @@ use Illuminate\Support\Arr;
     
     if($phone_comment_data!=null) {
         foreach ($phone_comment_data as $value) {
-            if($user_rates_and_comments[$value['ma_nguoidung']]) {
-                $user_rates_and_comments[$value['ma_nguoidung']]->comments[] = $value['noi_dung'];
-            } else {
-                $user = new User_rate_and_comment(0, []);
-                $user->comments[] = $value['noi_dung'];
-                $user_rates_and_comments[$value['ma_nguoidung']] = $user; 
-            }
+            $user_id = $value['ma_nguoidung'];
+            $user_rate_data_2 = executeQuery($conn, "SELECT*FROM danhgia WHERE ma_nguoidung = ? AND ma_dienthoai = ?", [$user_id, getRequest('g', 'product_id')]);
+            $user_rate = ($user_rate_data_2 != null) ? $user_rate_data_2[0]['gia_tri'] : null;
+            $user_comment = $value['noi_dung'];
+            $user_rc = new User_rate_and_comment($user_id, $user_rate, $user_comment);
+            $user_rates_and_comments[] = $user_rc;
         }
     }
 
