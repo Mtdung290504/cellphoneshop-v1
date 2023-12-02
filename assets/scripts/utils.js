@@ -43,4 +43,4 @@ function renderStars(starCount) {
     }
   
     return result;
-  }
+}

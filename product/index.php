@@ -45,7 +45,7 @@
     $phone_info_data = executeQuery($conn, "SELECT*FROM dienthoai WHERE ma_dienthoai = ?", [$product_id])[0];
     $phone_images_data = executeQuery($conn, "SELECT link_anh FROM anh_dienthoai WHERE ma_dienthoai = ?", [$product_id]);
     $phone_spc_data = executeQuery($conn, "SELECT*FROM thong_so_ky_thuat_dienthoai WHERE ma_dienthoai = ? ORDER BY ma_thong_so", [$product_id]);
-    $phone_rate_data = executeQuery($conn, "SELECT*FROM danhgia WHERE ma_dienthoai = ?", [$product_id]);
+    $phone_rate_data = executeQuery($conn, "SELECT AVG(gia_tri) AS gia_tri_tb FROM danhgia WHERE ma_dienthoai = ?", [$product_id]);
     $phone_comment_data = executeQuery($conn, "SELECT*FROM binhluan WHERE ma_dienthoai = ?", [$product_id]);
     $phone_spc_title_data = executeQuery($conn, "SELECT ten_thong_so FROM thong_so_ky_thuat ORDER BY ma_thong_so");
 
@@ -59,12 +59,8 @@
     $comment_count = $phone_info_data['luot_binh_luan'];
     
     if($phone_rate_data!=null) {
-        foreach ($phone_rate_data as $value) {
-            $phone_rate += $value['gia_tri'];
-        }
-        $phone_rate /= count($phone_rate_data);
+        $phone_rate = round($phone_rate_data[0]['gia_tri_tb'], 1);
     }
-    $phone_rate = round($phone_rate, 1);
     
     if($phone_comment_data!=null) {
         foreach ($phone_comment_data as $value) {

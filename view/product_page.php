@@ -72,7 +72,7 @@
             </div>
             <div class="button-block">
                 <?php echo ($phone_info_data['ton_kho'] != 0)
-                    ? '<a href="javascript:void(0);" class="button">Đặt hàng</a>'
+                    ? '<a href="javascript:void(0);" class="button" id="check-out-btn">Đặt hàng</a>'
                         .'<a href="javascript:void(0);" class="button" id="add-to-cart-btn">Thêm vào giỏ hàng</a>'
                     : '<a style="cursor: block; background-color: red;" class="button">Hết hàng</a>'
                 ?>
@@ -96,21 +96,22 @@
 <script src="<?php echo getRootUrl().'assets/scripts2/swiper-bundle.min.js'?>"></script>
 <script>
     var swiper = new Swiper('.swiper-container', {
-    // Cấu hình tùy chọn của Swiper.js
-    slidesPerView: 1,
-    spaceBetween: 0,
-    loop: true,
-    pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-    },
-    autoplay: {
-        delay: 2000, // Khoảng thời gian chờ giữa các slide (đơn vị: miligiây)
-    },
+        // Cấu hình tùy chọn của Swiper.js
+        slidesPerView: 1,
+        spaceBetween: 0,
+        loop: true,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        autoplay: {
+            delay: 2000, // Khoảng thời gian chờ giữa các slide (đơn vị: miligiây)
+        },
     });
 </script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
+      var checkOutButton = document.querySelector('#check-out-btn');
       var addButton = document.querySelector('#add-to-cart-btn');
       var starsContainer = document.querySelector('.phone-rating-box .star-wrapper');
       var commentForm = document.querySelector('form#comment-form');
@@ -129,6 +130,47 @@
                 }
             };
             xhr.send('action=add&phone_id='+productId);
+        });
+      }
+
+      //Xử lý nút mua hàng
+      if(checkOutButton) {
+        checkOutButton.addEventListener('click', function() {
+            if('<?php echo isLoggedIn()?>') {
+                let requestUrl = window.location.href;
+                let form = document.createElement('form');
+                form.method = 'post';
+                form.action = '<?php echo getRootUrl()."checkout/index.php"?>';
+
+                let reqUrlInput = document.createElement('input');
+                reqUrlInput.type = 'hidden';
+                reqUrlInput.name = 'request_url';
+                reqUrlInput.value = requestUrl;
+
+                let reqPageInput = document.createElement('input');
+                reqPageInput.type = 'hidden';
+                reqPageInput.name = 'request_page';
+                reqPageInput.value = 'product_page';
+
+                let phoneIdInput = document.createElement('input');
+                phoneIdInput.type = 'hidden';
+                phoneIdInput.name = 'id_product';
+                phoneIdInput.value = '<?php echo $product_id?>';
+
+                form.appendChild(reqUrlInput);
+                form.appendChild(reqPageInput);
+                form.appendChild(phoneIdInput);
+                document.body.appendChild(form);
+
+                console.log(form);
+                form.submit();
+            } else {
+                if(confirm('Bạn có muốn đăng nhập để tiếp tục')) {
+                    window.location = '<?php echo getRootUrl()?>login';
+                } else {
+                    return false;
+                }
+            }
         });
       }
 

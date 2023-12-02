@@ -4,8 +4,12 @@
     $list_phone_display = [];
 
     $firm = getRequest('g', 'firm');
+    $firm_name = '';
     if($firm) {
         $list_phone_data = executeQuery($conn, "SELECT * FROM dienthoai WHERE ma_hang = ? ORDER BY ma_dienthoai DESC", [$firm]);
+        $firm_name = executeQuery($conn, "SELECT ten_hang FROM hang_dienthoai WHERE ma_hang = ?", [$firm]);
+        if($firm_name)
+            $firm_name = $firm_name[0]['ten_hang'];
         if($list_phone_data==null)
             $list_phone_data = [];
     }

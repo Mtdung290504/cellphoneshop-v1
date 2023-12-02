@@ -32,7 +32,7 @@
 </div>
 
 <h3 style="display: block; text-align: center; font-size: 27px; width: 100%; margin: 40px 0 60px 0;">
-    Danh mục sản phẩm
+    <?php echo $firm_name ? "Điện thoại $firm_name" : "Danh mục sản phẩm"?>
 </h3>
 
 <div class="choose-box">

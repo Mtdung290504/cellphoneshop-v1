@@ -34,7 +34,7 @@
           <td><?php echo number_format($phone_price, 0, ',', '.');?>đ</td>
           <td><input type="number" name="phone_count_<?php echo $phone_id?>" value="<?php echo $phone_count?>" min="1" max="5" onkeydown="return false"></td>
           <td><button class="delete-btn">X</button></td>
-          <td><input type="checkbox" name="product" checked onchange="updateTotalPrice()"></td>
+          <td><input type="checkbox" name="product" onchange="updateTotalPrice()"></td>
       </tr>
     <?php
               }
