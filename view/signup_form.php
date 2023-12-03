@@ -4,7 +4,7 @@
         <table>
             <tr><td>
                 *Tên Đăng Nhập
-                <input type="text" name="login_name" id="login_name" value="<?php echo (isset($login_name) && $login_name != '') ? $login_name : ''?>" placeholder="Tên Đăng Nhập (Nhiều hơn 6 ký tự, chỉ gồm chữ cái, số và dấu _ )">
+                <input required type="text" name="login_name" id="login_name" value="<?php echo (isset($login_name) && $login_name != '') ? $login_name : ''?>" placeholder="Tên Đăng Nhập (Nhiều hơn 6 ký tự, chỉ gồm chữ cái, số và dấu _ )">
             </td></tr>
             <tr><td class="error" id="error_login_name">
                 <?php if(isset($error_login_name) && $error_login_name != ''){echo '<div style="margin-bottom: 20px;">'.$error_login_name.'</div>';} ?>
@@ -12,7 +12,7 @@
 
             <tr><td>
                 *Mật Khẩu
-                <input type="password" name="login_password" id="login_password" value="<?php echo (isset($login_password) && $login_password != '') ? $login_password : ''?>" placeholder="Mật Khẩu (Nhiều hơn 6 ký tự, chứa ít nhất 1 chữ cái hoặc số)">
+                <input required type="password" name="login_password" id="login_password" value="<?php echo (isset($login_password) && $login_password != '') ? $login_password : ''?>" placeholder="Mật Khẩu (Nhiều hơn 6 ký tự, chứa ít nhất 1 chữ cái hoặc số)">
             </td></tr>
             <tr><td class="error" id="error_login_password">
                 <?php if(isset($error_login_password) && $error_login_password != ''){echo $error_login_password;} ?>
@@ -34,7 +34,7 @@
 
             <tr><td>
                 *Nhập Lại Mật Khẩu
-                <input type="password" name="re_login_password" id="re_login_password" value="<?php echo (isset($re_login_password) && $re_login_password != '') ? $re_login_password : ''?>" placeholder="Nhập Lại Mật Khẩu">
+                <input required type="password" name="re_login_password" id="re_login_password" value="<?php echo (isset($re_login_password) && $re_login_password != '') ? $re_login_password : ''?>" placeholder="Nhập Lại Mật Khẩu">
             </td></tr> 
             <tr><td class="error" id="error_re_login_password">
                 <?php if(isset($error_re_login_password) && $error_re_login_password != ''){echo $error_re_login_password;} ?>

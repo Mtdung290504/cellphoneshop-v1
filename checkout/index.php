@@ -23,6 +23,7 @@
             exit();
         }
         require_once(__DIR__.'/../view/header.php');
+        require_once(__DIR__.'/../view/check_out_form.php');
         require_once(__DIR__.'/../view/footer.php');
     } else {
         echo "<script>
