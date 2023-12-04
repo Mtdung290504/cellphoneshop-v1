@@ -52,6 +52,9 @@ checkoutpage form #phone-list .phone-item {
     align-items: center;
     margin-bottom: 10px;
     margin-left: 15px;
+    margin-right: 15px;
+    border: .5px solid lightgray;
+    border-radius: 5px;
 }
 
 checkoutpage form #phone-list .phone-item img {
@@ -68,7 +71,7 @@ checkoutpage form #phone-list .phone-item .phone-info {
 checkoutpage form #phone-list .phone-item .phone-info .phone-name {
     font-weight: bold;
     font-size: 18px;
-    margin: 10px 0;
+    margin: 5px 0;
 }
 
 checkoutpage form #phone-list .phone-item .phone-info input[type=number] {
@@ -89,14 +92,24 @@ checkoutpage form .form-group .payment-option input[type="radio"] {
     margin-right: 5px;
 }
 
-.submit-btn {
+checkoutpage form .submit-btn {
     display: block;
     width: 50%;
-    margin: 0 auto;
+    margin: 10px auto !important;
     padding: 10px;
     background-color: #4CAF50;
     color: white;
     font-size: 18px;
     border: none;
     cursor: pointer;
+}
+
+checkoutpage form .price-box {
+    margin: 30px 0;
+    font-size: 20px;
+}
+
+checkoutpage form .price-box .total-price{
+    color: red;
+    font-weight: bold;
 }

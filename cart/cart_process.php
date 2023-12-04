@@ -19,7 +19,7 @@ if(isLoggedIn()) {
             case 'add':
                 $phone_id = getRequest('p', 'phone_id');
                 $mess = "Sản phẩm đã có trong giỏ hàng rồi!";
-                if(executeQuery($conn, "SELECT*FROM giohang WHERE ma_dienthoai = ?", [$phone_id]) == null) {
+                if(executeQuery($conn, "SELECT*FROM giohang WHERE ma_dienthoai = ? AND ma_nguoidung = ?", [$phone_id, getRequest('s', 'user_id')]) == null) {
                     update_db_cart(getRequest('s','user_id'), $phone_id);
                     $mess = "Đã thêm sản phẩm vào giỏ hàng";
                 }

@@ -52,7 +52,7 @@
         exit();
     } else {
         if(!isset($have_access)) {
-            echo '<script>window.history.back();</script>';
+            echo "<script>window.location = '".getRootUrl()."'</script>";
             exit();
         }
     }

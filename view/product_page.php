@@ -161,8 +161,7 @@
                 form.appendChild(reqPageInput);
                 form.appendChild(phoneIdInput);
                 document.body.appendChild(form);
-
-                console.log(form);
+                
                 form.submit();
             } else {
                 if(confirm('Bạn có muốn đăng nhập để tiếp tục')) {

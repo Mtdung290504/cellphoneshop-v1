@@ -93,19 +93,45 @@
         return $luot_danh_gia_goc;
     }
 
-    function user_do_checkout(int $user_id, array $phone_id_and_count) {
-        /* với mỗi sản phẩm thao tác với 3 bảng: dienthoai, ban_dienthoai, lich_su_giao_dich
-            trừ ton_kho ở bảng điện thoại, 
-            thêm thông tin vào bảng ban_dienthoai và lich_su_giao_dich
-         */
+    function user_do_checkout(int $user_id, array $phone_id_and_count, string $ho_ten, string $sdt, string $diachi) {
         global $conn;
-        $current_date = date("d-m-y");
+        //Lấy ngày hiên tại
+        $current_date = date("Y-m-d");
+
+        //Thêm đơn hàng vào bảng và lấy mã đơn hàng.
+        executeQuery($conn, "INSERT INTO donhang (ho_va_ten, so_dien_thoai, dia_chi, ngay_dat_hang) VALUE (?, ?, ?, ?)", [$ho_ten, $sdt, $diachi, $current_date]);
+        $ma_don_hang = $conn->insert_id;
+
+        //Lặp qua các sản phẩm cần xử lý.
         foreach ($phone_id_and_count as $ma_dienthoai => $so_luong) {
-            $so_luong_goc = executeQuery($conn, "SELECT ton_kho FROM dienthoai WHERE ma_dienthoai = ?", [$ma_dienthoai])[0]['ton_kho'];
+            $dienthoai = executeQuery($conn, "SELECT * FROM dienthoai WHERE ma_dienthoai = ?", [$ma_dienthoai])[0];
+
+            //Lấy số lượng điện thoại tồn kho, tính toán số lượng mới.
+            $so_luong_goc = $dienthoai['ton_kho'];
             $so_luong_moi = $so_luong_goc - $so_luong;
-            executeQuery($conn, "UPDATE dienthoai SET ton_kho = ? WHERE ma_dienthoai = ?", [$so_luong_moi, $ma_dienthoai]);
-            executeQuery($conn, "INSERT INTO ban_dienthoai (ma_dienthoai, ngay_ban, so_luong_ban) VALUE (?, ?, ?)", [$ma_dienthoai, $current_date, $so_luong]);
-            executeQuery($conn, "INSERT INTO lich_su_giao_dich (ma_nguoidung, ma_dienthoai, so_luong, ngay_giao_dich) VALUE (?, ?, ?, ?)", [$user_id, $ma_dienthoai, $so_luong, $current_date]);
+            
+            //Lấy số lượng điện thoại đã bán.
+            $da_ban_goc = $dienthoai['da_ban'];
+            $da_ban_moi = $da_ban_goc + $so_luong;
+
+            //Lấy giá bán điện thoại (Vì giá có thể thay đổi theo thời gian.)
+            $gia_ban = executeQuery($conn, "SELECT gia_ban_dienthoai, giam_gia_dienthoai FROM dienthoai WHERE ma_dienthoai = ?", [$ma_dienthoai])[0];
+            if($gia_ban) {
+                $gia_ban = getDiscountedPrice($gia_ban['gia_ban_dienthoai'], $gia_ban['giam_gia_dienthoai']);
+            }
+
+            //Insert vào bảng ban_dienthoai để lấy số liệu thống kê doanh thu.
+            executeQuery($conn, "INSERT INTO ban_dienthoai (ma_dienthoai, ngay_ban, so_luong_ban, gia_ban) VALUE (?, ?, ?, ?)", [$ma_dienthoai, $current_date, $so_luong, $gia_ban]);
+            //Insert vào bảng lich_su_giao_dich để người dùng kiểm tra.
+            executeQuery($conn, "INSERT INTO lich_su_giao_dich (ma_nguoidung, ma_dienthoai, gia_ban, so_luong, ngay_giao_dich) VALUE (?, ?, ?, ?, ?)", [$user_id, $ma_dienthoai, $gia_ban, $so_luong, $current_date]);
+            //Insert vào bảng don_hang để admin truy vấn khi cần.
+            executeQuery($conn, "INSERT INTO dienthoai_donhang (ma_don_hang, ma_dienthoai, gia_ban, so_luong) VALUE (?, ?, ?, ?)", [$ma_don_hang, $ma_dienthoai, $gia_ban, $so_luong]);
+            //Set tồn kho mới vào bảng điện thoại.
+            executeQuery($conn, "UPDATE dienthoai SET ton_kho = ?, da_ban = ? WHERE ma_dienthoai = ?", [$so_luong_moi, $da_ban_moi, $ma_dienthoai]); 
         }
+    }
+
+    function guest_do_checkout() {
+
     }
 ?>

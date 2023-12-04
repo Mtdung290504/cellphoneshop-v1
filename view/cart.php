@@ -26,15 +26,21 @@
                 $phone_data = executeQuery($conn, "SELECT * FROM dienthoai WHERE ma_dienthoai = ? LIMIT 1", [$phone_id])[0];
                 $phone_name = $phone_data['ten_dienthoai'];
                 $phone_price = getDiscountedPrice($phone_data['gia_ban_dienthoai'], $phone_data['giam_gia_dienthoai']);
+                $ton_kho = $phone_data['ton_kho'];
                 $count++;
     ?>
       <tr class="product-item" data-product_id=<?php echo $phone_id?> data-product_price=<?php echo $phone_price?>>
           <td><img src="<?php echo getRootUrl().'/assets/images/product-images/'.filterImageName($thumbnail_image)?>" alt="<?php echo $thumbnail_image?>"></td>
           <td><?php echo $phone_name?></td>
           <td><?php echo number_format($phone_price, 0, ',', '.');?>đ</td>
-          <td><input type="number" name="phone_count_<?php echo $phone_id?>" value="<?php echo $phone_count?>" min="1" max="5" onkeydown="return false"></td>
-          <td><button class="delete-btn">X</button></td>
-          <td><input type="checkbox" name="product" onchange="updateTotalPrice()"></td>
+          <?php if($ton_kho>0) {?>
+            <td><input type="number" name="phone_count_<?php echo $phone_id?>" value="<?php echo $phone_count<5 ? $phone_count : 5?>" min="1" max="<?php echo $ton_kho<5 ? $ton_kho : 5?>" onkeydown="return false"></td>
+            <td><button class="delete-btn">X</button></td>
+            <td><input type="checkbox" name="product" onchange="updateTotalPrice()"></td>
+          <?php }else {?>
+            <td style="text-align: center;"><p style="font-weight: bold; color: red; font-size: 18px;">Hết hàng</p></td>
+            <td colspan="2"><button style="margin: auto;" class="delete-btn">X</button></td>
+          <?php }?>
       </tr>
     <?php
               }
@@ -49,15 +55,21 @@
                 $phone_data = executeQuery($conn, "SELECT * FROM dienthoai WHERE ma_dienthoai = ? LIMIT 1", [$phone_id])[0];
                 $phone_name = $phone_data['ten_dienthoai'];
                 $phone_price = getDiscountedPrice($phone_data['gia_ban_dienthoai'], $phone_data['giam_gia_dienthoai']);
+                $ton_kho = $phone_data['ton_kho'];
                 $count++; 
     ?>
       <tr class="product-item" data-product_id=<?php echo $phone_id?> data-product_price=<?php echo $phone_price?>>
           <td><img src="<?php echo getRootUrl().'/assets/images/product-images/'.filterImageName($thumbnail_image)?>" alt="<?php echo $thumbnail_image?>"></td>
           <td><?php echo $phone_name?></td>
           <td><?php echo number_format($phone_price, 0, ',', '.');?>đ</td>
-          <td><input type="number" name="phone_count_<?php echo $phone_id?>" value="<?php echo $phone_count?>" min="1" max="5" onkeydown="return false"></td>
-          <td><button class="delete-btn">X</button></td>
-          <td><input type="checkbox" name="product" checked onchange="updateTotalPrice()"></td>
+          <?php if($ton_kho>0) {?>
+            <td><input type="number" name="phone_count_<?php echo $phone_id?>" value="<?php echo $phone_count<5 ? $phone_count : 5?>" min="1" max="<?php echo $ton_kho<5 ? $ton_kho : 5?>" onkeydown="return false"></td>
+            <td><button class="delete-btn">X</button></td>
+            <td><input type="checkbox" name="product" onchange="updateTotalPrice()"></td>
+          <?php }else {?>
+            <td style="text-align: center;"><p style="font-weight: bold; color: red; font-size: 18px;">Hết hàng</p></td>
+            <td colspan="2"><button style="margin: auto;" class="delete-btn">X</button></td>
+          <?php }?>
       </tr>
     <?php         
             }
@@ -101,6 +113,7 @@
       var isMulti = 2;
       var deleteButtons = document.getElementsByClassName("delete-btn");
       var numberInputs = document.querySelectorAll('input[type="number"]');
+      var checkoutButton = document.querySelector('#checkout-btn');
       
       for (let i=0; i<deleteButtons.length; i++) {
           deleteButtons[i].addEventListener("click", function() {
@@ -131,7 +144,7 @@
           debounceTimeout = setTimeout(function() {
             var inputValue = event.target.value;
             var productItem = event.target.closest(".product-item");
-            var productId = productItem.dataset.product_id;console.log(productId);
+            var productId = productItem.dataset.product_id;
             // Gửi yêu cầu xóa sản phẩm bằng Ajax
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "<?php echo getRootUrl()?>cart/cart_process.php", true);
@@ -148,6 +161,58 @@
           numberInputs[i].addEventListener("change", updateTotalPrice);
       }
 
+      checkoutButton.addEventListener('click', function() {
+        let checkCount = 0;
+        let phoneIdArr = [];
+        let checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+                checkCount++;
+                var productItem = checkboxes[i].closest(".product-item");
+                phoneIdArr.push(productItem.dataset.product_id);
+            }
+        }
+        if(checkCount==0) {
+          alert('Vui lòng chọn ít nhất một sản phẩm!');
+          return false;
+        }
+        let strSend = JSON.stringify(phoneIdArr);
+
+        if('<?php echo isLoggedIn()?>') {
+          let requestUrl = window.location.href;
+          let form = document.createElement('form');
+          form.method = 'post';
+          form.action = '<?php echo getRootUrl()."checkout/index.php"?>';
+
+          let reqUrlInput = document.createElement('input');
+          reqUrlInput.type = 'hidden';
+          reqUrlInput.name = 'request_url';
+          reqUrlInput.value = requestUrl;
+
+          let reqPageInput = document.createElement('input');
+          reqPageInput.type = 'hidden';
+          reqPageInput.name = 'request_page';
+          reqPageInput.value = 'cart_page';
+
+          let phoneIdInput = document.createElement('input');
+          phoneIdInput.type = 'hidden';
+          phoneIdInput.name = 'id_product';
+          phoneIdInput.value = strSend;
+
+          form.appendChild(reqUrlInput);
+          form.appendChild(reqPageInput);
+          form.appendChild(phoneIdInput);
+          document.body.appendChild(form);
+          
+          form.submit();
+        } else {
+            if(confirm('Bạn có muốn đăng nhập để tiếp tục')) {
+                window.location = '<?php echo getRootUrl()?>login';
+            } else {
+                return false;
+            }
+        }
+      });
       // document.querySelector('#delete-selected-btn').addEventListener('click', function() {
       //   var checkboxes = document.querySelectorAll('input[type="checkbox"]');
       //   isMulti = 0;

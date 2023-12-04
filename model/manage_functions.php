@@ -46,7 +46,7 @@
         executeQuery($conn, $query, $params);
     }
 
-    function update_phone(int $phone_id) {
+    function update_phone(int $phone_id, Phone $new_phone) {
 
     }
 
