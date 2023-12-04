@@ -31,7 +31,15 @@
                 $request_url = getRequest('p', 'request_url');
                 $ho_ten = getRequest('p', 'ho_ten');
                 $sdt = getRequest('p', 'dien_thoai');
-                $diachi = getRequest('p', 'dia_chi');   
+                $diachi = getRequest('p', 'dia_chi');
+                $phone_id = json_decode(getRequest('p', 'phone_id'));
+                $phone_count = json_decode(getRequest('p', 'so_luong_dienthoai'));
+                $list_phone_checkout = [];
+                foreach ($phone_id as $key => $id) {
+                    $list_phone_checkout[$id] = $phone_count[$key];
+                }   
+                // var_dump($list_phone_checkout);
+                // user_do_checkout($user_id, $list_phone_checkout, $ho_ten, $sdt, $diachi);
                 // echo '<script>
                 //     alert("Mua sản phẩm thành công!")
                 //     window.location = "'.$request_url.'"
@@ -59,15 +67,15 @@
             } 
             
             else if($request_page == "cart_page") {
-                // $list_id = json_decode($id_product);
-                $list_id = ["1", "7", "3"];
+                $list_id = json_decode($id_product);
+                // $list_id = ["1", "7", "3"];
                 if(count($list_id) == 1){
                     $list_id_str = $list_id[0];
                     $sql = "SELECT * FROM dienthoai WHERE ma_dienthoai = ?";
                     $sql2 = "SELECT so_luong FROM giohang WHERE ma_dienthoai = ? AND ma_nguoidung = ?";
                     $request_phones = executeQuery($conn, $sql, [$list_id_str]);
-                    $so_luong = executeQuery($conn, $sql2, [$list_id_str, $user_id])[0]['so_luong'];
-                    $gia_dienthoai = getDiscountedPrice($request_phones[0]['gia_ban_dienthoai'], $request_phones[0]['giam_gia_dienthoai'])*$so_luong;
+                    $so_luong = executeQuery($conn, $sql2, [$list_id_str, $user_id]);
+                    $gia_dienthoai = getDiscountedPrice($request_phones[0]['gia_ban_dienthoai'], $request_phones[0]['giam_gia_dienthoai'])*$so_luong[0]['so_luong'];
                 } else {
                     $placeholders = implode(', ', array_fill(0, count($list_id), '?'));
                     $sql = "SELECT * FROM dienthoai WHERE ma_dienthoai IN ($placeholders) ORDER BY ma_dienthoai";

@@ -57,7 +57,7 @@
             throw new Exception("Lỗi trong quá trình thực thi truy vấn SQL.");
         }
     
-        if (stripos($query, 'select') === 0) {
+        if(strpos($query, 'SELECT') !== false) {
             $resultSet = $statement->get_result();
             $rows = [];
             while ($row = $resultSet->fetch_assoc()) {
@@ -73,6 +73,10 @@
 
     function isLoggedIn() {
         return (getRequest('s', 'user_login_name') && getRequest('s', 'user_login_password'));
+    }
+
+    function isAdmin() {
+        return (isLoggedIn() && getRequest('s', 'is_admin'));
     }
 
     function filterImageName(string $name) {

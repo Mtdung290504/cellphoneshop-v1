@@ -4,7 +4,7 @@
     require_once(__DIR__.'/../model/database.php');
     require_once(__DIR__.'/../view/header.php');
     if(isLoggedIn()) {
-        echo "<script>window.location = '".getRootUrl()."'</script>";
+        header("Location: ".getRootUrl());
         exit();
     }
     $have_access = true;

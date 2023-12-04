@@ -52,7 +52,7 @@
         exit();
     } else {
         if(!isset($have_access)) {
-            echo "<script>window.location = '".getRootUrl()."'</script>";
+            header("Location: ".getRootUrl());
             exit();
         }
     }

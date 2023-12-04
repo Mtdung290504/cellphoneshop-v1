@@ -35,8 +35,10 @@
                 </div>
             <?php } else if($request_page == "cart_page") {
                     $ma_dienthoai_to_send = [];
+                    $so_luong_to_send = [];
                     foreach ($request_phones as $key => $phone_data) {
                         $ma_dienthoai_to_send[] = $phone_data['ma_dienthoai'];
+                        $so_luong_to_send[] = $so_luong[$key]['so_luong'];
                     ?>
                     <div class="phone-item">
                         <img src="<?php echo getRootUrl().'assets/images/product-images/'.filterImageName(
@@ -55,7 +57,8 @@
             <?php }?>
                 <input type="hidden" name="request_url" value="<?php echo $request_url?>">
                 <input type="hidden" name="list_phone_type" value="multiple">
-                <input type="hidden" name="phone_id" value="<?php echo json_encode($ma_dienthoai_to_send)?>">     
+                <input type="hidden" name="phone_id" value="<?php echo json_encode($ma_dienthoai_to_send)?>">
+                <input type="hidden" name="so_luong_dienthoai" value="<?php echo json_encode($so_luong_to_send)?>">
             <?php }?>
         </div>
 

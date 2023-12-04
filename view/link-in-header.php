@@ -8,7 +8,7 @@
         </span> 
         <?php
             echo ($_SESSION['is_admin']!=1) ? '<a class="login-link" href="">Xem Thông Tin</a> /' 
-                                            : '<a class="login-link" href="">Đến Trang Quản Trị</a> /';
+                                            : '<a class="login-link" href="'.getRootUrl().'manage">Đến Trang Quản Trị</a> /';
         ?>
         <a class="login-link" href="<?php echo getRootUrl();?>logout">Đăng Xuất</a>
     <?php } else /*NẾU CHƯA ĐĂNG NHẬP*/ {?>

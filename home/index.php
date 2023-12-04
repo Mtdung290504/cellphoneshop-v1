@@ -1,12 +1,12 @@
 <?php
     $list_firm_data = executeQuery($conn, "SELECT * FROM hang_dienthoai");
-    $list_phone_data = executeQuery($conn, "SELECT * FROM dienthoai ORDER BY ma_dienthoai DESC");
+    $list_phone_data = executeQuery($conn, "SELECT * FROM dienthoai WHERE da_xoa IS NULL ORDER BY ma_dienthoai DESC");
     $list_phone_display = [];
 
     $firm = getRequest('g', 'firm');
     $firm_name = '';
     if($firm) {
-        $list_phone_data = executeQuery($conn, "SELECT * FROM dienthoai WHERE ma_hang = ? ORDER BY ma_dienthoai DESC", [$firm]);
+        $list_phone_data = executeQuery($conn, "SELECT * FROM dienthoai WHERE ma_hang = ? AND da_xoa IS NULL ORDER BY ma_dienthoai DESC", [$firm]);
         $firm_name = executeQuery($conn, "SELECT ten_hang FROM hang_dienthoai WHERE ma_hang = ?", [$firm]);
         if($firm_name)
             $firm_name = $firm_name[0]['ten_hang'];

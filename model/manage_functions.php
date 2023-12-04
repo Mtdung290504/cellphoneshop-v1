@@ -51,6 +51,9 @@
     }
 
     function delete_phone(int $phone_id) {
-
+        /**
+         * Thực hiện xoá ở 3 bảng:
+         * 
+         */
     }
 ?>

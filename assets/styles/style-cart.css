@@ -66,6 +66,7 @@
     padding: 10px 20px;
     cursor: pointer;
     font-size: 18px;
+    min-width: 300px;
   }
   
   .empty-cart-message {
