@@ -64,7 +64,7 @@ dashboard .sidebar .links ul li a:hover {
       dashboard content .search-bar {
         display: flex;
         align-items: center;
-        margin: 25px 0;
+        margin: 5px 0 15px 0;
       }
 
       dashboard content .search-bar label {
@@ -72,12 +72,15 @@ dashboard .sidebar .links ul li a:hover {
         font-weight: bold;
         font-size: 16px;
       }
+      dashboard content .search-bar label.info{
+        min-width: 180px;
+      }
 
-      dashboard content .search-bar input[type="text"] {
-          width: 300px;
-          font-size: 16px;
-          padding: 5px;
-          outline: none;
+      dashboard content .search-bar input[type="text"], input[type="number"] {
+          width: 300px !important;
+          font-size: 16px !important; 
+          padding: 5px !important;
+          outline: none !important;
           font-family: 'Times New Roman', Times, serif;
           border: 1px solid lightgray;
       }

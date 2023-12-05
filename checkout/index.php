@@ -37,13 +37,12 @@
                 $list_phone_checkout = [];
                 foreach ($phone_id as $key => $id) {
                     $list_phone_checkout[$id] = $phone_count[$key];
-                }   
-                // var_dump($list_phone_checkout);
-                // user_do_checkout($user_id, $list_phone_checkout, $ho_ten, $sdt, $diachi);
-                // echo '<script>
-                //     alert("Mua sản phẩm thành công!")
-                //     window.location = "'.$request_url.'"
-                // </script>';
+                }
+                user_do_checkout($user_id, $list_phone_checkout, $ho_ten, $sdt, $diachi);
+                echo '<script>
+                    alert("Mua sản phẩm thành công!")
+                    window.location = "'.$request_url.'"
+                </script>';
             }
             exit();
         }

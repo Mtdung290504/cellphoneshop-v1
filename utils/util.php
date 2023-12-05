@@ -57,7 +57,7 @@
             throw new Exception("Lỗi trong quá trình thực thi truy vấn SQL.");
         }
     
-        if(strpos($query, 'SELECT') !== false) {
+        if(strpos($query, 'SELECT') !== false && strpos($query, 'SELECT') < 5) {
             $resultSet = $statement->get_result();
             $rows = [];
             while ($row = $resultSet->fetch_assoc()) {
@@ -81,6 +81,10 @@
 
     function filterImageName(string $name) {
         return str_replace(array('/', '|'), '_',$name);
+    }
+
+    function getUrlProductImage(string $name) {
+        return getRootUrl().'assets/images/product-images-sandbox/'.filterImageName($name);
     }
 
     function getDiscountedPrice($price, $discount) {

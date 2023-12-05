@@ -7,7 +7,7 @@
     <label for="search-input">Tìm kiếm:</label>
     <input type="text" id="search-input">
 </div>
-<a href="#" class="add-product-btn"><i class="fas fa-plus"></i> Thêm sản phẩm</a>
+<a href="?action=them_sanpham" class="add-product-btn"><i class="fas fa-plus"></i> Thêm sản phẩm</a>
 <table class="phone-table">
     <thead>
         <tr>
@@ -32,7 +32,7 @@
                 <td class="<?php echo $phone_data['ton_kho']==0 ? 'alert' : ''?>"><?php echo $phone_data['ton_kho']?></td>
                 <td class="actions"><a href="?action=nhap_hang&product_id=<?php echo $phone_data['ma_dienthoai']?>"><i class="fas fa-plus"></i></a></td>
                 <td class="actions"><a href="?action=sua_sanpham&product_id=<?php echo $phone_data['ma_dienthoai']?>"><i class="fas fa-pencil-alt"></i></a></td>
-                <td class="actions"><a href="?action=xoa_sanpham&product_id=<?php echo $phone_data['ma_dienthoai']?>"><i class="fas fa-trash"></i></a></td>                
+                <td class="actions"><a class="delete-phone" data-product_id=<?php echo $phone_data['ma_dienthoai']?> href="?action=xoa_sanpham&product_id=<?php echo $phone_data['ma_dienthoai']?>"><i class="fas fa-trash"></i></a></td>                
             </tr>
         <?php }?>
     </tbody>
@@ -61,5 +61,15 @@
                 phone.style.display = name.includes(searchValue) ? 'table-row' : 'none';
             }
         });
+    });
+
+    let delete_buttons = document.querySelectorAll('a.delete-phone');
+    delete_buttons.forEach(link => {
+        link.addEventListener('click', function(event) {
+            event.preventDefault();
+            if(confirm(`Xác nhận xóa sản phẩm có ID là ${this.dataset.product_id}?`)) {
+                window.location.href = this.href;
+            }
+        })
     });
 </script>

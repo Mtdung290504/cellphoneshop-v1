@@ -128,10 +128,12 @@
             executeQuery($conn, "INSERT INTO dienthoai_donhang (ma_don_hang, ma_dienthoai, gia_ban, so_luong) VALUE (?, ?, ?, ?)", [$ma_don_hang, $ma_dienthoai, $gia_ban, $so_luong]);
             //Set tồn kho mới vào bảng điện thoại.
             executeQuery($conn, "UPDATE dienthoai SET ton_kho = ?, da_ban = ? WHERE ma_dienthoai = ?", [$so_luong_moi, $da_ban_moi, $ma_dienthoai]); 
+            //Xóa sản phẩm khỏi giỏ hàng người dùng
+            executeQuery($conn, "DELETE FROM giohang WHERE ma_nguoidung = ? AND ma_dienthoai = ?", [$user_id, $ma_dienthoai]);
         }
     }
 
     function guest_do_checkout() {
-
+        //
     }
 ?>
