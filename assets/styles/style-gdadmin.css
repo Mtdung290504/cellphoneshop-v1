@@ -1,9 +1,9 @@
-dashboard {
+.dashboard {
   display: flex;
   height: 100vh;
 }
 
-dashboard .sidebar {
+.dashboard .sidebar {
   width: 300px;
   background-color: #333;
   color: #fff;
@@ -11,42 +11,42 @@ dashboard .sidebar {
 }
 
 /* Menu */
-dashboard .sidebar .links {
+.dashboard .sidebar .links {
   margin-bottom: 20px;
 }
 
-dashboard .sidebar .links h3 {
+.dashboard .sidebar .links h3 {
   margin-bottom: 10px;
   font-size: 20px;
 }
 
-dashboard .sidebar .links h3.title {
+.dashboard .sidebar .links h3.title {
   margin-bottom: 20px;
 }
 
-dashboard .sidebar .links ul {
+.dashboard .sidebar .links ul {
   list-style-type: none;
   padding: 0;
   margin: 35px 0 0 10px;
 }
 
-dashboard .sidebar .links ul li {
+.dashboard .sidebar .links ul li {
   margin: 15px 0;
 }
 
-dashboard .sidebar .links ul li a {
+.dashboard .sidebar .links ul li a {
   color: #fff;
   text-decoration: none;
   font-size: 18px;
 }
 
-dashboard .sidebar .links ul li a:hover {
+.dashboard .sidebar .links ul li a:hover {
   text-decoration: underline;
 }
 
 
 /*GD trang quản lý sp------------------------------------------------------------------------------------------------------*/
-      dashboard content {
+      .dashboard content {
         flex: 1;
         padding: 20px 20px 50px 20px;
         height: 100%;
@@ -54,30 +54,30 @@ dashboard .sidebar .links ul li a:hover {
       }
 
       /* Content */
-      dashboard content h3.title {
+      .dashboard content h3.title {
         margin-bottom: 40px;
         font-size: 27px;
         width: 100%;
         text-align: center;
       }
 
-      dashboard content .search-bar {
+      .dashboard content .search-bar {
         display: flex;
         align-items: center;
         margin: 5px 0 15px 0;
       }
 
-      dashboard content .search-bar label {
+      .dashboard content .search-bar label {
         margin-right: 10px;
         font-weight: bold;
         font-size: 16px;
       }
-      dashboard content .search-bar label.info{
+      .dashboard content .search-bar label.info{
         min-width: 180px;
       }
 
-      dashboard content .search-bar input[type="text"], input[type="number"] {
-          width: 300px !important;
+      .dashboard content .search-bar input[type="text"], input[type="number"] {
+          width: 300px;
           font-size: 16px !important; 
           padding: 5px !important;
           outline: none !important;
@@ -85,46 +85,46 @@ dashboard .sidebar .links ul li a:hover {
           border: 1px solid lightgray;
       }
 
-      dashboard content .phone-table {
+      .dashboard content .phone-table {
         width: 100%;
         border-collapse: collapse;
         font-size: 16px;
       }
 
-      dashboard content .phone-table th,
-      dashboard content .phone-table td {
+      .dashboard content .phone-table th,
+      .dashboard content .phone-table td {
         padding: 10px;
         border: 1px solid #ccc;
       }
 
-      dashboard content .phone-table th {
+      .dashboard content .phone-table th {
         background-color: #f2f2f2;
         font-weight: bold;
       }
 
-      dashboard content .phone-table td img {
+      .dashboard content .phone-table td img {
         display: block;
         width: 100px;
         height: 100px;
       }
 
-      dashboard content .phone-table td {
+      .dashboard content .phone-table td {
         text-align: center;
       }
-      dashboard content .phone-table td.alert {
+      .dashboard content .phone-table td.alert {
         background-color: rgba(250, 0, 0, .1);
         color: red; 
         font-weight: bold;
       }
-      dashboard content .phone-table td.phone-name {
+      .dashboard content .phone-table td.phone-name {
           text-align: left;
       }
-      dashboard content .phone-table td.actions a {
+      .dashboard content .phone-table td.actions a {
         color: #333;
         text-decoration: none;
       }
 
-      dashboard content .add-product-btn {
+      .dashboard content .add-product-btn {
         display: inline-block;
         background-color: #333;
         color: #fff;
@@ -136,7 +136,73 @@ dashboard .sidebar .links ul li a:hover {
         font-size: 16px;
       }
 
-      dashboard content .add-product-btn i {
+      .dashboard content .add-product-btn i {
         margin-right: 5px;
       }
 /*GD trang quản lý sp------------------------------------------------------------------------------------------------------*/
+
+/*GD trang thêm sp------------------------------------------------------------------------------------------------------*/
+      .form-upload {
+        margin: 0 40px;
+      }
+      .form-upload form flex-container {
+        display: flex;
+        align-items: flex-start;
+        width: 100%;
+      }
+      .form-upload form flex-container table-container  {
+        width: 50%;
+        padding: 0 30px;
+      }
+      .form-upload form flex-container table-container table {
+        width: 100%;
+        border-spacing: 10px;
+      }
+      .form-upload form flex-container table-container table tr{
+        width: 100%;
+      }
+      .form-upload form flex-container table-container table tr.title {
+        text-align: center;
+        font-size: 20px;
+      }
+      .form-upload form flex-container table-container table tr.title h3 {
+        margin-bottom: 30px;
+      }
+      .form-upload form flex-container table-container table tr td :is(label, input, select, option, textarea)   {
+        padding: 5px !important;
+        font-size: 16px !important;
+        font-family: 'Times New Roman', Times, serif;
+      }
+      .form-upload form flex-container table-container table tr td :is(input, select, option, textarea) {
+        border: 1px solid lightgray;
+        outline: none;    
+      }
+      .form-upload form flex-container table-container table tr td textarea {
+        resize: vertical;
+        height: 31.6px;
+        max-height: 150px;
+        min-height: 31.6px;
+        margin: 5px 0;
+      }
+      .form-upload form flex-container table-container table tr td :is(input:not(input[type="submit"]), textarea){
+        width: 100% !important;
+      }
+      .form-upload form .submit-box {
+        display: flex;
+        width: 100%;
+        padding-top: 30px;
+        align-items: center;
+        justify-content: center;
+      }
+      .form-upload form .submit-box input[type="submit"] {
+        font-size: 16px;
+        padding: 10px;
+        min-width: 200px;
+        cursor: pointer;
+        background-color: #333;
+        color: white;
+        border: none;
+        outline: none;
+        border-radius: 5px;
+      }
+/*GD trang thêm sp------------------------------------------------------------------------------------------------------*/

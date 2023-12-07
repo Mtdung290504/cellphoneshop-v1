@@ -13,7 +13,7 @@
                             foreach ($phone_info->image_links as $img_link) {?>
                             <div class="swiper-slide">
                                 <div class="img-container">
-                                    <img src="<?php echo getRootUrl().'assets/images/product-images/'.filterImageName($img_link)?>" alt="<?php echo filterImageName($img_link)?>">
+                                    <img src="<?php echo getUrlProductImage($img_link)?>" alt="<?php echo filterImageName($img_link)?>">
                                 </div>
                             </div>
                     <?php }}?>

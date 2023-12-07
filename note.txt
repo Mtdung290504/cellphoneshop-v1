@@ -3,3 +3,5 @@ thanh toán nhiều sản phẩm từ giỏ hàng cần kiểm tra lại sau khi
 
 tk admin: @cps_admin_mtd
           admi7@
+
+database và hàm lấy link ảnh đang trỏ vào phiên bản sandbox

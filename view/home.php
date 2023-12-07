@@ -48,7 +48,7 @@
     <?php foreach ($list_phone_display as $phone) { ?>
         <div class="product-item"><a href="<?php echo getRootUrl().'product?product_id='.$phone->id?>">
             <div class="product-image">
-                <img src="<?php echo getRootUrl().'/assets/images/product-images/'.filterImageName($phone->thumbnail_image)?>" alt="<?php echo filterImageName($phone->thumbnail_image)?>">
+                <img src="<?php echo getUrlProductImage($phone->thumbnail_image)?>" alt="<?php echo filterImageName($phone->thumbnail_image)?>">
             </div>
             <div class="product-status <?php echo ($phone->status) ? '' : 'no' ?>"><?php echo $phone->status?></div>
             <div class="product-name"><?php echo $phone->name?></div>

@@ -9,7 +9,7 @@
 </head>
 
 <body>
-  <dashboard>
+  <div class="dashboard">
     <div class="sidebar">
       <div class="links">
         <h3 class="title">Cellphones Shop - Dashboard</h3>

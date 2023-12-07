@@ -26,7 +26,7 @@
                     <input type="hidden" name="request_url" value="<?php echo $request_url?>">
                     <input type="hidden" name="list_phone_type" value="single">
                     <input type="hidden" name="phone_id" value="<?php echo $id_product?>">
-                    <img src="<?php echo getRootUrl().'assets/images/product-images/'.filterImageName($thumbnail_image)?>" alt="<?php echo filterImageName($thumbnail_image)?>">
+                    <img src="<?php echo getUrlProductImage($thumbnail_image)?>" alt="<?php echo filterImageName($thumbnail_image)?>">
                     <div class="phone-info">
                         <div class="phone-name"><?php echo $ten_dienthoai?></div>
                         Số lượng: <input id="phone-count" type="number" name="so_luong_dienthoai" min="1" max="<?php echo $ton_kho<5 ? $ton_kho : 5?>" value="1" onkeydown="return false">
@@ -41,9 +41,9 @@
                         $so_luong_to_send[] = $so_luong[$key]['so_luong'];
                     ?>
                     <div class="phone-item">
-                        <img src="<?php echo getRootUrl().'assets/images/product-images/'.filterImageName(
+                        <img src="<?php echo getUrlProductImage(
                             executeQuery($conn, "SELECT link_anh FROM anh_dienthoai WHERE ma_dienthoai = ? LIMIT 1", [$phone_data['ma_dienthoai']])[0]['link_anh']
-                            )?>" alt="">
+                        )?>" alt="">
                         <div class="phone-info">
                             <div class="phone-name"><?php echo $phone_data['ten_dienthoai']?></div>
                             Số lượng: <?php echo $so_luong[$key]['so_luong'];?>

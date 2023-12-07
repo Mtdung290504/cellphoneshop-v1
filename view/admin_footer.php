@@ -1,4 +1,4 @@
     </content>
-  </dashboard>
+  </div>
 </body>
 </html>

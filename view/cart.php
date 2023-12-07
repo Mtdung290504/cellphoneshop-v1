@@ -30,7 +30,7 @@
                 $count++;
     ?>
       <tr class="product-item" data-product_id=<?php echo $phone_id?> data-product_price=<?php echo $phone_price?>>
-          <td><img src="<?php echo getRootUrl().'/assets/images/product-images/'.filterImageName($thumbnail_image)?>" alt="<?php echo $thumbnail_image?>"></td>
+          <td><img src="<?php echo getUrlProductImage($thumbnail_image)?>" alt="<?php echo $thumbnail_image?>"></td>
           <td><?php echo $phone_name?></td>
           <td><?php echo number_format($phone_price, 0, ',', '.');?>đ</td>
           <?php if($ton_kho>0) {?>
@@ -59,7 +59,7 @@
                 $count++; 
     ?>
       <tr class="product-item" data-product_id=<?php echo $phone_id?> data-product_price=<?php echo $phone_price?>>
-          <td><img src="<?php echo getRootUrl().'/assets/images/product-images/'.filterImageName($thumbnail_image)?>" alt="<?php echo $thumbnail_image?>"></td>
+          <td><img src="<?php echo getUrlProductImage($thumbnail_image)?>" alt="<?php echo $thumbnail_image?>"></td>
           <td><?php echo $phone_name?></td>
           <td><?php echo number_format($phone_price, 0, ',', '.');?>đ</td>
           <?php if($ton_kho>0) {?>

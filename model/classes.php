@@ -117,10 +117,10 @@
 
     class User_rate_and_comment {
         public int $user_id;
-        public int $rate;
+        public $rate;
         public string $comment;
 
-        public function __construct(int $user_id, int $rate, string $comment) {
+        public function __construct(int $user_id, $rate, string $comment) {
             $this->user_id = $user_id;
             $this->rate = $rate;
             $this->comment = $comment;

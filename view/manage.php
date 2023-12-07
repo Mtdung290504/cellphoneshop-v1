@@ -27,7 +27,7 @@
         ?>
             <tr id=<?php echo $phone_data['ma_dienthoai']?>>
                 <td><?php echo $phone_data['ma_dienthoai']?></td>
-                <td class="actions"><img src="<?php echo getRootUrl().'/assets/images/product-images/'.filterImageName($thumbnail_image)?>" alt="<?php echo filterImageName($thumbnail_image)?>"></td>
+                <td class="actions"><img src="<?php echo getUrlProductImage($thumbnail_image)?>" alt="<?php echo filterImageName($thumbnail_image)?>"></td>
                 <td class="phone-name"><?php echo $phone_data['ten_dienthoai']?></td>
                 <td class="<?php echo $phone_data['ton_kho']==0 ? 'alert' : ''?>"><?php echo $phone_data['ton_kho']?></td>
                 <td class="actions"><a href="?action=nhap_hang&product_id=<?php echo $phone_data['ma_dienthoai']?>"><i class="fas fa-plus"></i></a></td>

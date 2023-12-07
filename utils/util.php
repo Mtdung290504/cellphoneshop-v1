@@ -84,7 +84,11 @@
     }
 
     function getUrlProductImage(string $name) {
-        return getRootUrl().'assets/images/product-images-sandbox/'.filterImageName($name);
+        return getRootUrl().'assets/images/product-images/'.filterImageName($name);
+    }
+
+    function getUrlProductImageFolder() {
+        return getRootUrl().'assets/images/product-images/';
     }
 
     function getDiscountedPrice($price, $discount) {
