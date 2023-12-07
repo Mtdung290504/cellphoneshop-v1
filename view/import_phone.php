@@ -28,11 +28,15 @@
 <form id="form_nhap_hang" action="" method="post">
     <div class="search-bar">
         <label class="info">Giá nhập mỗi sản phẩm:</label>
-        <input style="width: 200px !important;" type="number" name="phone_price" min="1000000" step="100000" value="1000000"><span style="font-size: 18px; margin-left: 10px">đ</span>
+        <input style="width: 200px !important;" type="number" id="phone_price" name="phone_price" min="1000000" step="100000" value="1000000"><span style="font-size: 18px; margin-left: 10px">đ</span>
     </div>
     <div class="search-bar">
         <label class="info">Số lượng sản phẩm:</label>
-        <input style="width: 200px !important;" type="number" name="phone_count" value="1" min="1"><span style="font-size: 18px; margin-left: 10px">Cái</span>
+        <input style="width: 200px !important;" type="number" id="phone_count" name="phone_count" value="1" min="1"><span style="font-size: 18px; margin-left: 10px">Cái</span>
+    </div>
+    <div class="search-bar">
+        <label class="info">Tổng giá sản phẩm:</label>
+        <input style="width: 200px !important;" type="text" id="total_price" disabled><span style="font-size: 18px; margin-left: 10px">đ</span>
     </div>
     <a href="javascript:void(0);" class="add-product-btn"><i class="fas fa-plus"></i> Nhập hàng</a>
 </form>
@@ -46,4 +50,16 @@
             form.submit();
         }
     });
+
+    let priceInput = document.getElementById('phone_price'); 
+    let countInput = document.getElementById('phone_count'); 
+    let totalPrice = document.getElementById('total_price'); 
+    function calculateTotalPrice() { 
+        let price = parseFloat(priceInput.value); 
+        let count = parseFloat(countInput.value);
+        totalPrice.value = formatMoney(price*count); 
+    } 
+    priceInput.addEventListener('input', calculateTotalPrice); 
+    countInput.addEventListener('input', calculateTotalPrice);
+    calculateTotalPrice();
 </script>

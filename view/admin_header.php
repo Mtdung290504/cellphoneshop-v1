@@ -18,6 +18,7 @@
           <li><span style="color: rgb(0, 100, 230);">►</span> <a href="<?php echo getRootUrl()?>logout">Đăng xuất</a></li>
           <li><span style="color: rgb(0, 100, 230);">►</span> <a href="<?php echo getRootUrl()?>">Về trang chủ</a></li>
           <li><span style="color: rgb(0, 100, 230);">►</span> <a href="<?php echo getRootUrl()?>manage">Quản lý sản phẩm</a></li>
+          <li><span style="color: rgb(0, 100, 230);">►</span> <a href="<?php echo getRootUrl()?>manage?action=ql_danhmuc">Quản lý danh mục</a></li>
           <li><span style="color: rgb(0, 100, 230);">►</span> <a href="<?php echo getRootUrl()?>manage?action=xem_donhang">Xem đơn hàng</a></li>
           <li><span style="color: rgb(0, 100, 230);">►</span> <a href="<?php echo getRootUrl()?>manage?action=tk_doanhthu">Thống kê doanh thu</a></li>
           <li><span style="color: rgb(0, 100, 230);">►</span> <a href="<?php echo getRootUrl()?>manage?action=tk_tuongtac">Thống kê tương tác</a></li>
