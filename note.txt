@@ -1,2 +1,0 @@
-tk admin: @cps_admin_mtd
-          admi7@
