@@ -67,8 +67,8 @@
                 } ?>
             </ul>
             <div class="price-block">
-                <span class="main-price"><?php echo number_format(getDiscountedPrice($phone_info->price, $phone_info->discount), 0, ',', '.')?>đ</span>
-                <span class="price"><?php echo number_format($phone_info->price, 0, ',', '.')?>đ</span>
+                <span class="main-price"><?php $main_price = number_format(getDiscountedPrice($phone_info->price, $phone_info->discount), 0, ',', '.'); echo $main_price.'đ'?></span>
+                <span class="price"><?php echo ($phone_info->discount > 0 && $phone_info->discount != $main_price)?number_format($phone_info->price, 0, ',', '.').'đ':''?></span>
             </div>
             <div class="button-block">
                 <?php echo ($phone_info_data['ton_kho'] != 0)

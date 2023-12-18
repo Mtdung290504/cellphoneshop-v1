@@ -46,7 +46,7 @@
     $phone_images_data = executeQuery($conn, "SELECT link_anh FROM anh_dienthoai WHERE ma_dienthoai = ?", [$product_id]);
     $phone_spc_data = executeQuery($conn, "SELECT*FROM thong_so_ky_thuat_dienthoai WHERE ma_dienthoai = ? ORDER BY ma_thong_so", [$product_id]);
     $phone_rate_data = executeQuery($conn, "SELECT AVG(gia_tri) AS gia_tri_tb FROM danhgia WHERE ma_dienthoai = ?", [$product_id]);
-    $phone_comment_data = executeQuery($conn, "SELECT*FROM binhluan WHERE ma_dienthoai = ?", [$product_id]);
+    $phone_comment_data = executeQuery($conn, "SELECT*FROM binhluan WHERE ma_dienthoai = ? ORDER BY ma_binhluan DESC", [$product_id]);
     $phone_spc_title_data = executeQuery($conn, "SELECT ten_thong_so FROM thong_so_ky_thuat ORDER BY ma_thong_so");
 
     $phone_spc;

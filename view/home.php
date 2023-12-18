@@ -54,7 +54,7 @@
             <div class="product-name"><?php echo $phone->name?></div>
             <div class="product-price">
                 <span class="main-price"><?php echo number_format(getDiscountedPrice($phone->price, $phone->discount), 0, ',', '.')?>đ</span>
-                <span class="price"><?php echo number_format($phone->price, 0, ',', '.')?>đ</span>
+                <span class="price"><?php echo ($phone->discount > 0 && $phone->price != getDiscountedPrice($phone->price, $phone->discount))?number_format($phone->price, 0, ',', '.').'đ':''?></span>
             </div>
             <div class="product-rating">
                 <?php if($phone->stars != 0) {?>

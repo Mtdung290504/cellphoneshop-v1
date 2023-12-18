@@ -123,5 +123,26 @@
         }
       
         return $result;
-      }
+    }
+
+    function add_query_to_current_url($query) {
+        $url = $_SERVER['REQUEST_URI'];
+        $url_parts = parse_url($url);
+        if(isset($url_parts['query'])) {
+            // URL có chứa dấu ? rồi thì thêm dấu &
+            $existing_query = $url_parts['query']; 
+            parse_str($existing_query, $params);
+            $params = array_merge($params, $query);
+            $new_query = http_build_query($params);
+            return $url_parts['path'] . '?' . $new_query;
+        } else {
+            // URL chưa có dấu ? thì thêm vào với dấu ?
+            $new_query = http_build_query($query);
+            return $url . '?' . $new_query;
+        }
+    }
+      
+    // Usage
+    $query = array('page' => 2);
+    $new_url = add_query_to_current_url($query);
 ?>
