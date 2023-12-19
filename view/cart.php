@@ -84,7 +84,7 @@
 </div>
 
 <div class="actions">
-  <!-- <button id="delete-selected-btn">Xóa sản phẩm đã chọn</button> -->
+  <button id="select-all-btn">Chọn tất cả</button>
   <button id="checkout-btn">Thanh toán</button>
 </div>
 
@@ -95,6 +95,13 @@
 
 
 <script>
+    document.querySelector('#select-all-btn').addEventListener('click', ()=> {
+      let checkboxs = document.querySelectorAll('input[type="checkbox"]');
+      checkboxs.forEach(checkbox => {
+        checkbox.click();
+      });
+    });
+
     function updateTotalPrice() {
       var total = 0;
       var numberInputs = document.querySelectorAll('input[type="number"]');

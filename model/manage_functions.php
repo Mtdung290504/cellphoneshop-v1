@@ -48,6 +48,21 @@
 
     function update_phone(int $phone_id, Phone $new_phone) {
         global $conn;
+        executeQuery($conn, "UPDATE dienthoai SET
+            ten_dienthoai = ?, gia_ban_dienthoai = ?,
+            giam_gia_dienthoai = ?, mo_ta_dienthoai = ?,
+            ma_hang = ? WHERE ma_dienthoai = ?
+        ", [$new_phone->name, $new_phone->price, $new_phone->discount, 
+            $new_phone->decription, $new_phone->firm_id, $phone_id]);
+        $spc = $new_phone->specifis;
+        $spc_id = 1;
+        foreach ($spc as $value) {
+            executeQuery($conn, 
+                "UPDATE thong_so_ky_thuat_dienthoai SET gia_tri = ? WHERE ma_thong_so = ? AND ma_dienthoai = ?", 
+                [$value, $spc_id, $phone_id]
+            );
+            $spc_id++;
+        }
     }
 
     function delete_phone(int $phone_id) {

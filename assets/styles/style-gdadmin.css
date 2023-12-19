@@ -179,7 +179,7 @@
       }
       .form-upload form flex-container table-container table tr td textarea {
         resize: vertical;
-        height: 31.6px;
+        height: fit-content;
         max-height: 150px;
         min-height: 31.6px;
         margin: 5px 0;

@@ -21,7 +21,10 @@
             <td class="actions"><img src="<?php echo getUrlProductImage($thumbnail_image)?>" alt="<?php echo filterImageName($thumbnail_image)?>"></td>
             <td class="phone-name"><?php echo $phone_data['ten_dienthoai']?></td>
             <td class="<?php echo $phone_data['ton_kho']==0 ? 'alert' : ''?>"><?php echo $phone_data['ton_kho']?></td>   
-            <td><?php echo number_format($phone_data['gia_ban_dienthoai'], 0, ',', '.')?>đ</td>           
+            <td><?php 
+                $gia_ban = getDiscountedPrice($phone_data['gia_ban_dienthoai'], $phone_data['giam_gia_dienthoai']);
+                echo number_format($gia_ban, 0, ',', '.')
+            ?>đ (đã giảm <?php echo $phone_data['giam_gia_dienthoai']?>%)</td>           
         </tr>
     </tbody>
 </table>

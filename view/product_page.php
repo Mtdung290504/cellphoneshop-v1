@@ -130,6 +130,7 @@
                     if(xhr.responseText != "Sản phẩm đã có trong giỏ hàng rồi!") {
                         let count_ctn = document.querySelector(".cart-count p");
                         count_ctn.textContent = Number(count_ctn.textContent)+1;
+                        document.querySelector(".cart-count").style.display = "flex";
                     }
                 }
             };

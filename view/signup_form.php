@@ -61,7 +61,7 @@
 
             <tr><td>
                 Số Điện Thoại
-                <input type="number" name="user_tel" id="user_tel" value="<?php echo isset($user_tel)?$user_tel:''?>" placeholder="Số Điện Thoại">
+                <input style="font-size: 18px !important; padding: 12px !important;" type="number" name="user_tel" id="user_tel" value="<?php echo isset($user_tel)?$user_tel:''?>" placeholder="Số Điện Thoại">
             </td></tr>
 
             <tr><td>

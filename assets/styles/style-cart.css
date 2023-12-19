@@ -58,7 +58,7 @@
     margin-top: 20px;
   }
   
-  .cart-container #delete-selected-btn,
+  .cart-container #select-all-btn,
   .cart-container #checkout-btn {
     background-color: #4CAF50;
     color: #fff;
