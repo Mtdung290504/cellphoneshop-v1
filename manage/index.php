@@ -113,6 +113,11 @@
                 require_once __DIR__.'/../view/manage.php'; 
                 break;
 
+            case 'tk_doanhthu':
+                $list_phone_data = executeQuery($conn, "SELECT * FROM dienthoai WHERE da_xoa IS NULL ORDER BY ma_dienthoai DESC");
+                $tong_doanh_thu = 0;
+                require_once __DIR__.'/../view/thongke_doanhthu.php';
+                break;
             default:
                 header("Location: ".getRootUrl()."manage");
                 break;

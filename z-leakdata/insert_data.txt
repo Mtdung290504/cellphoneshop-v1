@@ -1,0 +1,7 @@
+<?php
+require_once __DIR__."/../model/classes.php";
+require_once __DIR__."/../model/database.php";
+require_once __DIR__."/../model/manage_functions.php";
+require_once __DIR__."/../utils/util.php";
+
+?>
