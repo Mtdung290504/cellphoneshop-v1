@@ -1,24 +1,4 @@
-<nav class="menu">
-    <ul class="menu-list">
-        <li class="menu-item">
-            <a>Hãng điện thoại</a>
-            <ul class="submenu">
-                <?php foreach ($list_firm_data as $value) {?>
-                    <li><a href="<?php echo getRootUrl().'?firm='.$value['ma_hang']?>"><?php echo $value['ten_hang']?></a></li>
-                <?php }?>
-            </ul>
-        </li>
-
-        <li class="menu-item cart-icon">
-            <a href="<?php echo getRootUrl().'/cart'?>">
-                <i class="fa fa-shopping-cart"></i>
-                <p>Giỏ hàng</p>
-            </a>
-            <div class="cart-count" style="display: <?php echo ($cart_count && $cart_count != 0) ? 'flex' : 'none' ?>"><?php echo "<p>$cart_count</p>"?></div>
-        </li>
-    </ul>
-</nav>
-
+<?php require_once __DIR__."/../view/top_nav.php"?>
 
 <div class="swiper-container">
     <div class="swiper-wrapper">
@@ -37,37 +17,37 @@
 
 <div class="choose-box">
     <p>Sắp xếp theo</p>
-    <select>
-        <option>Mới nhất</option>
-        <option>Tùy chọn 1</option>
-        <option>Tùy chọn 2</option>
+    <select onchange="window.location.href = this.value" value="">
+        <option style="display:none"></option>
+        <option value="<?php echo add_query_to_current_url(array('sort'=>'newest'))?>">Mới nhất</option>
+        <option value="<?php echo add_query_to_current_url(array('sort'=>'top_selling'))?>">Bán chạy nhất</option>
+        <option value="<?php echo add_query_to_current_url(array('sort'=>'price_asc'))?>">Giá tăng dần</option>
+        <option value="<?php echo add_query_to_current_url(array('sort'=>'price_desc'))?>">Giá giảm dần</option>
+        <option value="<?php echo add_query_to_current_url(array('sort'=>'discount'))?>">Ưu đãi nhất</option>
+        <option value="<?php echo add_query_to_current_url(array('sort'=>'most_viewed'))?>">Xem nhiều nhất</option>
+        <!-- <option value=""></option>
+        <option value=""></option>
+        <option value=""></option> -->
     </select>
+    <script>
+        var currentSortValue = "<?php echo $sort_request ?>";
+        document.addEventListener("DOMContentLoaded", function() {
+        var selectElement = document.querySelector("select");
+        var options = selectElement.options;
+        for (var i = 0; i < options.length; i++) {
+            if (options[i].value.indexOf(currentSortValue) != -1) {
+                options[i].selected = true;
+                break;
+            }
+        }
+        });
+    </script>
 </div>
 
 <div class="product-grid">
-    <?php foreach ($list_phone_display as $phone) { ?>
-        <div class="product-item"><a href="<?php echo getRootUrl().'product?product_id='.$phone->id?>">
-            <div class="product-image">
-                <img src="<?php echo getUrlProductImage($phone->thumbnail_image)?>" alt="<?php echo filterImageName($phone->thumbnail_image)?>">
-            </div>
-            <div class="product-status <?php echo ($phone->status) ? '' : 'no' ?>"><?php echo $phone->status?></div>
-            <div class="product-name"><?php echo $phone->name?></div>
-            <div class="product-price">
-                <span class="main-price"><?php echo number_format(getDiscountedPrice($phone->price, $phone->discount), 0, ',', '.')?>đ</span>
-                <span class="price"><?php echo ($phone->discount > 0 && $phone->price != getDiscountedPrice($phone->price, $phone->discount))?number_format($phone->price, 0, ',', '.').'đ':''?></span>
-            </div>
-            <div class="product-rating">
-                <?php if($phone->stars != 0) {?>
-                    <span class="star-wrapper">
-                        <?php echo renderStars($phone->stars)?>
-                    </span>
-                    <span class="rating"><?php echo $phone->stars.'/5'?></span>
-                <?php } else{echo '<span class="none-star">Chưa có lượt đánh giá</span>';}?>
-            </div>
-        </a></div>
-    <?php } ?>
+    <?php echo build_list_phone_html($list_phone_display)?>
 </div>
-
+<div id="endlist"></div>
 
 <script src="<?php echo getRootUrl().'assets/scripts2/swiper-bundle.min.js'?>"></script>
 <script>

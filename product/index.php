@@ -106,6 +106,7 @@
         $phone_spc
     );
 
+    require_once __DIR__."/../view/top_nav.php";
     require_once __DIR__.'/../view/product_page.php';
     require_once __DIR__.'/../view/footer.php';
 ?>

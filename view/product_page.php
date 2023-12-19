@@ -127,6 +127,10 @@
             xhr.onreadystatechange = function() {
                 if(xhr.readyState === 4 && xhr.status === 200) {
                     alert(xhr.responseText);
+                    if(xhr.responseText != "Sản phẩm đã có trong giỏ hàng rồi!") {
+                        let count_ctn = document.querySelector(".cart-count p");
+                        count_ctn.textContent = Number(count_ctn.textContent)+1;
+                    }
                 }
             };
             xhr.send('action=add&phone_id='+productId);

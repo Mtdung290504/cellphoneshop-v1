@@ -141,8 +141,4 @@
             return $url . '?' . $new_query;
         }
     }
-      
-    // Usage
-    $query = array('page' => 2);
-    $new_url = add_query_to_current_url($query);
 ?>

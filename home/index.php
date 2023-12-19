@@ -1,21 +1,55 @@
 <?php
-    $list_firm_data = executeQuery($conn, "SELECT * FROM hang_dienthoai");
-    $list_phone_data = executeQuery($conn, "SELECT * FROM dienthoai WHERE da_xoa IS NULL ORDER BY ma_dienthoai DESC");
-    $list_phone_display = [];
+    require_once __DIR__."/../model/build_view_functions.php";
 
+    /**
+     * nếu không có hãng, load danh sách bình thường
+     * nếu không có sort, select theo mã điện thoại giảm dần
+     */
     $firm = getRequest('g', 'firm');
     $firm_name = '';
+    $firm_request = [];
     if($firm) {
-        $list_phone_data = executeQuery($conn, "SELECT * FROM dienthoai WHERE ma_hang = ? AND da_xoa IS NULL ORDER BY ma_dienthoai DESC", [$firm]);
         $firm_name = executeQuery($conn, "SELECT ten_hang FROM hang_dienthoai WHERE ma_hang = ?", [$firm]);
-        if($firm_name)
+        if($firm_name) {
             $firm_name = $firm_name[0]['ten_hang'];
-        if($list_phone_data==null)
-            $list_phone_data = [];
+            $firm_request[] = $firm;
+        }
     }
-    if(getRequest('g', 'page')) {
+    $sort = "ma_dienthoai DESC";
+    $limit = "";
+    $label = "";
+    $sort_request = getRequest("g", "sort");
+    if($sort_request) {
+        switch ($sort_request) {
+            case 'top_selling':
+                $sort = "da_ban DESC, ten_dienthoai";
+                break;
+            case 'price_asc':
+                $sort = "(gia_ban_dienthoai - gia_ban_dienthoai*giam_gia_dienthoai/100) ASC, da_ban DESC, ten_dienthoai";
+                break;
+            case 'price_desc':
+                $sort = "(gia_ban_dienthoai - gia_ban_dienthoai*giam_gia_dienthoai/100) DESC, da_ban DESC, ten_dienthoai";
+                break;  
+            case 'discount':
+                $sort = "giam_gia_dienthoai DESC, da_ban DESC, ten_dienthoai";
+                break;   
+            case 'most_viewed':
+                $sort = "luot_xem DESC, da_ban DESC, ten_dienthoai";
+                break;
+            default:
+                $sort = "ma_dienthoai DESC";
+                break;
+        }
+    }
+    if($firm) {
+        $sql = "SELECT * FROM dienthoai WHERE ma_hang = ? AND da_xoa IS NULL ORDER BY $sort $limit";
+        $list_phone_data = executeQuery($conn, $sql, $firm_request);
+    } else {
+        $sql = "SELECT * FROM dienthoai WHERE da_xoa IS NULL ORDER BY $sort $limit";
+        $list_phone_data = executeQuery($conn, $sql);        
+    }
 
-    }
+    $list_phone_display = [];
 
     foreach ($list_phone_data as $value) {
         $phone_rate_data = executeQuery($conn, "SELECT*FROM danhgia WHERE ma_dienthoai = ?", [$value['ma_dienthoai']]);
@@ -39,18 +73,10 @@
         );
         $list_phone_display[] = $new_phone;
     }
+
+    //Lấy ds slide
     $list_slide_image = executeQuery($conn, "SELECT * FROM slide");
-    $cart_count = 0;
-    if(isLoggedIn()) {
-        $rs = executeQuery($conn, "SELECT * FROM giohang WHERE ma_nguoidung = ?", [getRequest('s', 'user_id')]);
-        $cart_count = ($rs==null) ? 0 : count($rs);
-    } else {
-        $cart_cookie = json_decode(getRequest('c', 'cart'), true);
-        if($cart_cookie) {
-            $cart_count = count($cart_cookie);
-        }
-    }
-    $product_status = '';//Tình trạng hàng, tính sau
+
     require_once(__DIR__.'/../view/home.php');
 ?>
 

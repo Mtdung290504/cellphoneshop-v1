@@ -44,3 +44,13 @@ function renderStars(starCount) {
   
     return result;
 }
+
+function addUrlGet(key, value) {
+  let currentUrl = window.location.href;
+  if(currentUrl.indexOf('?') != -1) {
+    currentUrl += `?${key}=${value}`;
+  } else {
+    currentUrl += `&${key}=${value}`;
+  }
+  return currentUrl;
+}
