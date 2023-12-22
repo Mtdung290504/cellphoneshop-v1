@@ -170,7 +170,7 @@ body {
     margin: 10px auto;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    grid-gap: 10px;
+    grid-gap: 14px;
     min-height: 40vh;
   }
   
@@ -190,15 +190,15 @@ body {
     align-items: center;
     justify-content: center;
     position: absolute;
-    top: 5px;
+    top: 10px;
     left: -6px;
-    width: 60px;
+    width: 84px;
     height: auto;
     background-color: red;
     color: white;
     border-radius: 10px 5px 5px 5px;
-    padding: 6px 5px;
-    font-size: 18px;
+    padding: 5px 7px;
+    font-size: 15px;
     font-weight: bold;
   }
   .product-grid .product-item a {

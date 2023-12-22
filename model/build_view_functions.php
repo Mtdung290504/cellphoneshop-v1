@@ -4,7 +4,7 @@
         foreach ($list_phone_display as $phone) {
             $html .= '<div class="product-item">';
             if($phone->discount > 0) {
-                $html .= '<div class="discount-label">- '.$phone->discount.'%</div>';
+                $html .= '<div class="discount-label">Giảm '.$phone->discount.'%</div>';
             }
             $html .= '<a href="' . getRootUrl() . 'product?product_id=' . $phone->id . '">
                 <div class="product-image">
