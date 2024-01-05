@@ -1,13 +1,9 @@
---Tạo CSDL cellphoneshopv0
-CREATE DATABASE IF NOT EXISTS cellphoneshopv0;
-USE cellphoneshopv0;
-
 -- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1:3307
--- Thời gian đã tạo: Th12 18, 2023 lúc 10:43 AM
+-- Thời gian đã tạo: Th1 05, 2024 lúc 03:19 AM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.2.4
 
@@ -24,7 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Cơ sở dữ liệu: `cellphoneshopv0`
 --
-
+create database if not exists cellphoneshopv0;
+use cellphoneshopv0;
 -- --------------------------------------------------------
 
 --
@@ -500,7 +497,11 @@ INSERT INTO `anh_dienthoai` (`ma_anh`, `link_anh`, `ma_dienthoai`) VALUES
 (485, 'oneplus_11_5g_16gb_256gb-7.jpg', 32),
 (486, 'oneplus_11_5g_16gb_256gb-8.jpg', 32),
 (487, 'oneplus_11_5g_16gb_256gb-9.jpg', 32),
-(488, 'oneplus_11_5g_16gb_256gb-10.jpg', 32);
+(488, 'oneplus_11_5g_16gb_256gb-10.jpg', 32),
+(489, 'tcl-408_4__1.webp', 33),
+(490, 'tcl-408_7_.webp', 33),
+(491, 'tcl-408_9_.webp', 33),
+(492, '1_366_1.webp', 34);
 
 -- --------------------------------------------------------
 
@@ -521,10 +522,42 @@ CREATE TABLE `ban_dienthoai` (
 --
 
 INSERT INTO `ban_dienthoai` (`ma_ban`, `ma_dienthoai`, `ngay_ban`, `so_luong_ban`, `gia_ban`) VALUES
-(2, 1, '2003-12-23', 3, 21610000),
+(2, 1, '2023-12-03', 3, 21610000),
 (3, 1, '2023-12-03', 1, 21610000),
 (4, 1, '2023-12-03', 2, 21610000),
-(5, 1, '2023-12-03', 1, 21610000);
+(5, 1, '2023-12-03', 1, 21610000),
+(6, 8, '2023-12-19', 5, 44990000),
+(7, 25, '2023-12-19', 4, 18990000),
+(8, 19, '2023-12-19', 2, 8000000),
+(9, 17, '2023-12-19', 5, 8990000),
+(10, 1, '2023-12-19', 5, 21610000),
+(11, 19, '2023-12-19', 5, 8000000),
+(12, 32, '2023-12-19', 5, 20250000),
+(13, 32, '2023-12-19', 5, 20250000),
+(14, 32, '2023-12-19', 3, 20250000),
+(15, 19, '2023-12-19', 4, 8000000),
+(16, 13, '2023-12-19', 2, 8060000),
+(17, 17, '2023-12-19', 5, 8990000),
+(18, 19, '2023-12-19', 3, 8000000),
+(19, 1, '2023-12-19', 4, 21610000),
+(20, 2, '2023-12-19', 4, 27590000),
+(21, 17, '2023-12-19', 2, 8820000),
+(22, 19, '2023-12-19', 3, 8000000),
+(23, 6, '2023-12-19', 5, 17330000),
+(24, 17, '2023-12-19', 5, 8820000),
+(25, 19, '2023-12-19', 5, 8000000),
+(26, 25, '2023-12-19', 5, 18990000),
+(27, 32, '2023-12-19', 1, 20250000),
+(28, 4, '2023-12-19', 5, 22390000),
+(29, 6, '2023-12-19', 2, 17330000),
+(30, 14, '2023-12-19', 5, 6500000),
+(31, 17, '2023-12-19', 5, 8820000),
+(32, 1, '2023-12-22', 2, 21610000),
+(33, 13, '2023-12-22', 1, 8060000),
+(34, 28, '2023-12-22', 5, 3010000),
+(35, 33, '2023-12-22', 5, 3460000),
+(36, 8, '2023-12-22', 1, 44990000),
+(37, 1, '2023-12-23', 2, 21610000);
 
 -- --------------------------------------------------------
 
@@ -551,7 +584,14 @@ INSERT INTO `binhluan` (`ma_binhluan`, `ma_nguoidung`, `ma_dienthoai`, `noi_dung
 (6, 1, 6, 'Không tệ'),
 (7, 2, 1, 'Sản phẩm tốt'),
 (8, 2, 2, 'Sản phẩm rất tốt'),
-(9, 1, 2, 'Chất lượng!');
+(9, 1, 2, 'Chất lượng!'),
+(10, 1, 25, 'Sản phẩm tuyệt vời'),
+(11, 1, 17, 'Sản phẩm tốt!'),
+(12, 2, 19, 'Được'),
+(13, 5, 19, 'Giá tốt, hàng tốt'),
+(14, 6, 25, 'like'),
+(15, 3, 14, 'tốt'),
+(16, 1, 28, 'sản phẩm tốt');
 
 -- --------------------------------------------------------
 
@@ -575,13 +615,43 @@ INSERT INTO `danhgia` (`ma_danhgia`, `ma_nguoidung`, `ma_dienthoai`, `gia_tri`) 
 (6, 2, 2, 4),
 (7, 2, 1, 5),
 (8, 2, 6, 5),
-(9, 1, 6, 3),
+(9, 1, 6, 4),
 (10, 1, 8, 4),
 (11, 1, 4, 5),
-(12, 3, 6, 2),
+(12, 3, 6, 4),
 (13, 3, 1, 1),
 (14, 1, 2, 5),
-(15, 1, 7, 4);
+(15, 1, 7, 4),
+(16, 1, 25, 5),
+(17, 1, 29, 4),
+(18, 1, 19, 5),
+(19, 1, 17, 5),
+(20, 1, 28, 5),
+(21, 1, 13, 5),
+(22, 1, 15, 3),
+(23, 1, 23, 4),
+(24, 2, 32, 4),
+(25, 2, 19, 4),
+(26, 2, 17, 5),
+(27, 2, 11, 4),
+(28, 2, 13, 2),
+(29, 2, 25, 5),
+(30, 5, 32, 5),
+(31, 5, 19, 5),
+(32, 5, 17, 5),
+(33, 5, 13, 4),
+(34, 5, 28, 3),
+(35, 5, 15, 5),
+(36, 6, 32, 4),
+(37, 6, 25, 4),
+(38, 6, 19, 5),
+(39, 6, 6, 4),
+(40, 6, 17, 4),
+(41, 3, 4, 4),
+(42, 3, 17, 5),
+(43, 3, 14, 5),
+(44, 3, 33, 4),
+(45, 3, 8, 5);
 
 -- --------------------------------------------------------
 
@@ -609,37 +679,39 @@ CREATE TABLE `dienthoai` (
 --
 
 INSERT INTO `dienthoai` (`ma_dienthoai`, `ten_dienthoai`, `gia_ban_dienthoai`, `giam_gia_dienthoai`, `mo_ta_dienthoai`, `ton_kho`, `da_ban`, `luot_xem`, `luot_binh_luan`, `luot_danh_gia`, `ma_hang`, `da_xoa`) VALUES
-(1, 'iPhone 15 128GB | Chính hãng VN/A', 22990000, 6, 'Thiết kế thời thượng và bền bỉ - Mặt lưng kính được pha màu xu hướng cùng khung viền nhôm bền bỉ\nDynamic Island hiển thị linh động mọi thông báo ngay lập tức giúp bạn nắm bắt mọi thông tin\nChụp ảnh đẹp nức lòng - Camera chính 48MP, Độ phân giải lên đến 4x và Tele 2x chụp chân dung hoàn hảo\nPin dùng cả ngày không lắng lo - Thời gian xem video lên đến 20 giờ và sạc nhanh qua cổng USB-C tiện lợi\nCải tiến hiệu năng vượt bậc - A16 Bionic mạnh mẽ giúp bạn cân mọi tác vụ dù có yêu cầu đồ hoạ cao', 3, 7, 108, 4, 3, 1, NULL),
-(2, 'iPhone 14 Pro Max 128GB | Chính hãng VN/A', 29990000, 8, 'Màn hình Dynamic Island - Sự biến mất của màn hình tai thỏ thay thế bằng thiết kế viên thuốc, OLED 6,7 inch, hỗ trợ always-on display\r\nCấu hình iPhone 14 Pro Max mạnh mẽ, hiệu năng cực khủng từ chipset A16 Bionic\r\nLàm chủ công nghệ nhiếp ảnh - Camera sau 48MP, cảm biến TOF sống động\r\nPin liền lithium-ion kết hợp cùng công nghệ sạc nhanh cải tiến', 10, 0, 51, 2, 2, 1, NULL),
+(1, 'iPhone 15 128GB | Chính hãng VN/A', 22990000, 6, 'Thiết kế thời thượng và bền bỉ - Mặt lưng kính được pha màu xu hướng cùng khung viền nhôm bền bỉ\nDynamic Island hiển thị linh động mọi thông báo ngay lập tức giúp bạn nắm bắt mọi thông tin\nChụp ảnh đẹp nức lòng - Camera chính 48MP, Độ phân giải lên đến 4x và Tele 2x chụp chân dung hoàn hảo\nPin dùng cả ngày không lắng lo - Thời gian xem video lên đến 20 giờ và sạc nhanh qua cổng USB-C tiện lợi\nCải tiến hiệu năng vượt bậc - A16 Bionic mạnh mẽ giúp bạn cân mọi tác vụ dù có yêu cầu đồ hoạ cao', 0, 20, 115, 4, 3, 1, NULL),
+(2, 'iPhone 14 Pro Max 128GB | Chính hãng VN/A', 29990000, 8, 'Màn hình Dynamic Island - Sự biến mất của màn hình tai thỏ thay thế bằng thiết kế viên thuốc, OLED 6,7 inch, hỗ trợ always-on display\r\nCấu hình iPhone 14 Pro Max mạnh mẽ, hiệu năng cực khủng từ chipset A16 Bionic\r\nLàm chủ công nghệ nhiếp ảnh - Camera sau 48MP, cảm biến TOF sống động\r\nPin liền lithium-ion kết hợp cùng công nghệ sạc nhanh cải tiến', 6, 4, 56, 2, 2, 1, NULL),
 (3, 'iPhone 15 Pro Max 256GB | Chính hãng VN/A', 34990000, 5, 'Thiết kế khung viền từ titan chuẩn hàng không vũ trụ - Cực nhẹ, bền cùng viền cạnh mỏng cầm nắm thoải mái\r\nHiệu năng Pro chiến game thả ga - Chip A17 Pro mang lại hiệu năng đồ họa vô cùng sống động và chân thực\r\nThoả sức sáng tạo và quay phim chuyên nghiệp - Cụm 3 camera sau đến 48MP và nhiều chế độ tiên tiến\r\nNút tác vụ mới giúp nhanh chóng kích hoạt tính năng yêu thích của bạn', 0, 0, 7, 0, 0, 1, NULL),
-(4, 'Samsung Galaxy S23 Ultra 256GB', 31990000, 30, 'Thoả sức chụp ảnh, quay video chuyên nghiệp - Camera đến 200MP, chế độ chụp đêm cải tiến, bộ xử lí ảnh thông minh\r\nChiến game bùng nổ - chip Snapdragon 8 Gen 2 8 nhân tăng tốc độ xử lí, màn hình 120Hz, pin 5.000mAh\r\nNâng cao hiệu suất làm việc với Siêu bút S Pen tích hợp, dễ dàng đánh dấu sự kiện từ hình ảnh hoặc video\r\nThiết kế bền bỉ, thân thiện - Màu sắc lấy cảm hứng từ thiên nhiên, chất liệu kính và lớp phim phủ PET tái chế', 0, 0, 15, 0, 1, 2, NULL),
-(5, 'Samsung Galaxy Z Flip5 512GB', 29990000, 43, 'Thần thái nổi bật, cân mọi phong cách- Lấy cảm hứng từ thiên nhiên với màu sắc thời thượng, xu hướng\r\nThiết kế thu hút ánh nhìn - Gập không kẽ hỡ, dẫn đầu công nghệ bản lề Flex\r\nTuyệt tác selfie thoả sức sáng tạo - Camera sau hỗ trợ AI xử lí cực sắc nét ngay cả trên màn hình ngoài\r\nBền bỉ bất chấp mọi tình huống - Đạt chuẩn kháng bụi và nước IP68 cùng chất liệu nhôm Armor Aluminum giúp hạn chế cong và xước', 0, 0, 3, 0, 0, 2, NULL),
-(6, 'Samsung Galaxy S22 Ultra (12GB - 256GB)', 33990000, 49, 'Vi xử lý mạnh mẽ nhất Galaxy - Snapdragon 8 Gen 1 (4 nm)\r\nCamera mắt thần bóng đêm Nightography - Chụp đêm cực đỉnh\r\nS Pen đầu tiên trên Galaxy S - Độ trễ thấp, dễ thao tác\r\nDung lượng pin bất chấp ngày đêm - Viên pin 5000mAh, sạc nhanh 45W', 7, 0, 20, 2, 3, 2, NULL),
+(4, 'Samsung Galaxy S23 Ultra 256GB', 31990000, 30, 'Thoả sức chụp ảnh, quay video chuyên nghiệp - Camera đến 200MP, chế độ chụp đêm cải tiến, bộ xử lí ảnh thông minh\r\nChiến game bùng nổ - chip Snapdragon 8 Gen 2 8 nhân tăng tốc độ xử lí, màn hình 120Hz, pin 5.000mAh\r\nNâng cao hiệu suất làm việc với Siêu bút S Pen tích hợp, dễ dàng đánh dấu sự kiện từ hình ảnh hoặc video\r\nThiết kế bền bỉ, thân thiện - Màu sắc lấy cảm hứng từ thiên nhiên, chất liệu kính và lớp phim phủ PET tái chế', 5, 5, 18, 0, 2, 2, NULL),
+(5, 'Samsung Galaxy Z Flip5 512GB', 29990000, 43, 'Thần thái nổi bật, cân mọi phong cách- Lấy cảm hứng từ thiên nhiên với màu sắc thời thượng, xu hướng\r\nThiết kế thu hút ánh nhìn - Gập không kẽ hỡ, dẫn đầu công nghệ bản lề Flex\r\nTuyệt tác selfie thoả sức sáng tạo - Camera sau hỗ trợ AI xử lí cực sắc nét ngay cả trên màn hình ngoài\r\nBền bỉ bất chấp mọi tình huống - Đạt chuẩn kháng bụi và nước IP68 cùng chất liệu nhôm Armor Aluminum giúp hạn chế cong và xước', 0, 0, 4, 0, 0, 2, NULL),
+(6, 'Samsung Galaxy S22 Ultra (12GB - 256GB)', 33990000, 49, 'Vi xử lý mạnh mẽ nhất Galaxy - Snapdragon 8 Gen 1 (4 nm)\r\nCamera mắt thần bóng đêm Nightography - Chụp đêm cực đỉnh\r\nS Pen đầu tiên trên Galaxy S - Độ trễ thấp, dễ thao tác\r\nDung lượng pin bất chấp ngày đêm - Viên pin 5000mAh, sạc nhanh 45W', 0, 7, 25, 2, 4, 2, NULL),
 (7, 'OPPO Find N3 Flip 12GB 256GB', 22990000, 0, 'Thiết kế gập linh hoạt, đường cong 3D, đường cắt kim cương - biểu tượng của sự phong cách giúp bạn luôn toả sáng\nĐiện thoại gập sở hữu 3 camera sắc nét - Chụp hình đơn giản hơn với Chế độ Flexform\nMàn hình phụ vạn năng - dễ dàng thao tác các tác vụ ngay trên màn hình phụ và tuỳ biến theo sở thích\nMàn hình sống động đáng kinh ngạc - Kích thước 6.8i nches, hỗ trợ 120Hz, HDR10+', 5, 0, 9, 0, 1, 4, NULL),
-(8, 'OPPO Find N3 16GB 512GB', 44990000, 0, 'Bậc thầy thiết kế, siêu mỏng nhe - Mỏng chỉ 239g, nhẹ chỉ 5.8mm với nếp gấp tàng hình\r\nRực rõ mọi màn hình hiển thị - Kích thước lên đến 7.8mm, độ phân giải 2K+ cùng tần số quét 120Hz mượt mà\r\nBậc thầy nhiếp ảnh - 3 camera hàng đầu đến 64MP kết hợp cùng đa dạng chế độ chụp hoàn hảo\r\nNâng cao hiệu suất sử dụng - Chip MediaTek Dimensity 9200 5G mạnh mẽ cùng hàng loạt tính năng đa nhiệm thông tinh', 15, 0, 7, 0, 1, 4, NULL),
+(8, 'OPPO Find N3 16GB 512GB', 44990000, 0, 'Bậc thầy thiết kế, siêu mỏng nhe - Mỏng chỉ 239g, nhẹ chỉ 5.8mm với nếp gấp tàng hình\r\nRực rõ mọi màn hình hiển thị - Kích thước lên đến 7.8mm, độ phân giải 2K+ cùng tần số quét 120Hz mượt mà\r\nBậc thầy nhiếp ảnh - 3 camera hàng đầu đến 64MP kết hợp cùng đa dạng chế độ chụp hoàn hảo\r\nNâng cao hiệu suất sử dụng - Chip MediaTek Dimensity 9200 5G mạnh mẽ cùng hàng loạt tính năng đa nhiệm thông tinh', 9, 6, 9, 0, 2, 4, NULL),
 (10, 'OPPO Reno8 5G (8GB 256GB)', 13990000, 42, 'Tái hiện màu sắc sống động - Màn hình lớn AMOLED 6.4 inch với độ phân giải Full HD+\r\nSáng tạo không giới hạn - Cụm camera lên đến 50 MP & Phụ 8 MP, 2 MP chụp đêm rõ nét\r\nChiến game thả ga - đa nhiệm mượt mà với chip MediaTek Dimensity 1300 tối ưu hiệu suất\r\nThoải mái sử dụng không lo cạn pin - Viên pin 4500 mAh cùng sạc nhanh 80W', 0, 0, 1, 0, 0, 4, NULL),
-(11, 'Xiaomi Redmi Note 12S', 6690000, 17, 'Thiết kế tinh tế, thu hút ánh nhìn - Sở hữu thiết kế cụm camera cải tiến cùng màu sắc thời thượng làm hài lòng bất kì ai\r\nTrọn vẹn từng thước phim - Màn hình 6.43inch cùng tấm nền AMOLED, tần số quét 90 Hz cho mọi khung hình trở nên sống động màu sắc\r\nCamera đỉnh không cần chỉnh - Cụm 3 camera với cảm biến chính AI đạt độ phân giải 108 MP\r\nHiệu năng ổ định, pin dùng dài lâu - Trang bị chip Mediatek Helio G96 cùng 5000 mAh và khả năng sạc nhanh 33 W', 0, 0, 1, 0, 0, 3, NULL),
+(11, 'Xiaomi Redmi Note 12S', 6690000, 17, 'Thiết kế tinh tế, thu hút ánh nhìn - Sở hữu thiết kế cụm camera cải tiến cùng màu sắc thời thượng làm hài lòng bất kì ai\r\nTrọn vẹn từng thước phim - Màn hình 6.43inch cùng tấm nền AMOLED, tần số quét 90 Hz cho mọi khung hình trở nên sống động màu sắc\r\nCamera đỉnh không cần chỉnh - Cụm 3 camera với cảm biến chính AI đạt độ phân giải 108 MP\r\nHiệu năng ổ định, pin dùng dài lâu - Trang bị chip Mediatek Helio G96 cùng 5000 mAh và khả năng sạc nhanh 33 W', 15, 0, 2, 0, 1, 3, NULL),
 (12, 'Xiaomi 12 Pro (5G)', 27990000, 49, 'Cân mọi tác vụ với CPU thế hệ mới - Vi xử lí Snapdragon 8 Gen 1 cùng RAM 12GB\r\nTrải ngiệm giải trí hoàn hảo với màn hình tràn viền sắc nét - Kích thước 6.73 inches, AMOLED\r\nCụm camera đa chức năng, lưu giữ mọi khoảnh khắc - Camera chính 50 MP đa dạng chế độ chụp\r\nThoải mái sử dụng cả ngày dài - Pin 4600 mAh, hỗ trợ sạc nhanh 120W', 0, 0, 2, 0, 0, 3, NULL),
-(13, 'Xiaomi Redmi Note 12 Pro 5G', 9490000, 15, 'Thiết kế hiện đại, trẻ trung với mặt lưng kính thời thượng và khung viền kim loại vuông vức sang trọng\r\nTấm nền AMOLED cho khả năng hiển thị rõ nét, tần số quét 120Hz giúp mọi thao tác trở nên mượt mà\r\nChinh chiến mọi tựa game, tha hồ đa nhiệm với bộ vi xử lý Dimensity 1080 5G kết hợp với RAM 8 GB\r\nBắt trọn mọi khoảnh khắc với cảm biến chính Sony IMX766 độ phân giải 50 MP hỗ trợ chống rung OIS', 0, 0, 1, 0, 0, 3, NULL),
-(14, 'realme 11 8GB 128GB', 7390000, 12, 'Nâng cao trải nghiệm với màn hình Super AMOLED - Màu sắc rực rỡ và độ tương phản cao, hình ảnh sắc nét và chi tiết.\r\nTrang bị camera Prolight 108MP và nhiều tính năng quay chụp - Tạo ra những bức ảnh sắc nét và chân thực nhờ độ phân giải cao.\r\nSử dụng chip MediaTek Helio G99 - Mang lại hiệu suất cao và khả năng xử lý mượt mà.\r\nDung lượng pin lớn 5000 mAh - Sử dụng thoải mái trong thời gian dài mà không lo hết pin', 0, 0, 0, 0, 0, 5, NULL),
-(15, 'realme 10 8GB 256GB', 7190000, 30, 'RAM mở rộng lên đến 16GB - Xử lí đa tác vụ mượt mà\r\nGiải trí cực đỉnh - Màn hình AMOLED 90Hz cuộn cuộn lướt và chuyển cảnh khi chơi game không giật lag\r\nXem YouTube liên tục đến 21h với viên pin 5000mAh\r\nThiết kế vi hạt ánh sáng lấp lánh kiêu sa phù hợp với các bạn nữ', 0, 0, 0, 0, 0, 5, NULL),
+(13, 'Xiaomi Redmi Note 12 Pro 5G', 9490000, 15, 'Thiết kế hiện đại, trẻ trung với mặt lưng kính thời thượng và khung viền kim loại vuông vức sang trọng\r\nTấm nền AMOLED cho khả năng hiển thị rõ nét, tần số quét 120Hz giúp mọi thao tác trở nên mượt mà\r\nChinh chiến mọi tựa game, tha hồ đa nhiệm với bộ vi xử lý Dimensity 1080 5G kết hợp với RAM 8 GB\r\nBắt trọn mọi khoảnh khắc với cảm biến chính Sony IMX766 độ phân giải 50 MP hỗ trợ chống rung OIS', 7, 3, 5, 0, 3, 3, NULL),
+(14, 'realme 11 8GB 128GB', 7390000, 12, 'Nâng cao trải nghiệm với màn hình Super AMOLED - Màu sắc rực rỡ và độ tương phản cao, hình ảnh sắc nét và chi tiết.\r\nTrang bị camera Prolight 108MP và nhiều tính năng quay chụp - Tạo ra những bức ảnh sắc nét và chân thực nhờ độ phân giải cao.\r\nSử dụng chip MediaTek Helio G99 - Mang lại hiệu suất cao và khả năng xử lý mượt mà.\r\nDung lượng pin lớn 5000 mAh - Sử dụng thoải mái trong thời gian dài mà không lo hết pin', 10, 5, 2, 1, 1, 5, NULL),
+(15, 'realme 10 8GB 256GB', 7190000, 30, 'RAM mở rộng lên đến 16GB - Xử lí đa tác vụ mượt mà\r\nGiải trí cực đỉnh - Màn hình AMOLED 90Hz cuộn cuộn lướt và chuyển cảnh khi chơi game không giật lag\r\nXem YouTube liên tục đến 21h với viên pin 5000mAh\r\nThiết kế vi hạt ánh sáng lấp lánh kiêu sa phù hợp với các bạn nữ', 15, 0, 2, 0, 2, 5, NULL),
 (16, 'realme 11 Pro (8GB -  256GB)', 11990000, 4, 'Màn hình hiển thị cong đục lỗ ở chính giữa - cao cấp từ trong ra ngoài cùng tần số quét 120Hz.\r\nCông nghệ thu phóng trong cảm biến tiên tiến mang lại ảnh ảnh chi tiết cực kỳ rõ ràng.\r\nVi xử lý MediaTek Dimensity 7050 mang lại hiệu năng mạnh mẽ sẵn sàng chiến các game phổ thông.\r\nThiết kế mặt lưng giả da sang trọng cùng đường chỉ căn giữa và cụm camera hình tròn đầy nổi bật.', 0, 0, 0, 0, 0, 5, NULL),
-(17, 'vivo V29E 8GB 256GB', 8990000, 0, 'Hiệu năng vượt trội với chip Snapdragon 695 - Giúp bạn xử lý các tác vụ mượt mà không cần phải lo lắng có bị giật, lag.\r\nMàn hình Sunlight AMOLED 120Hz - Cho hình ảnh sắc nét, màu sắc tươi sáng, trung thực.\r\nPin khủng kèm sạc siêu siêu tốc 44W - Giúp bạn sử dụng thoải mái trong vòng hai ngày.\r\nCụm camera được cải tiến giúp quay video và chụp ra bức ảnh rất tốt, hài hòa, sống động hơn.', 0, 0, 0, 0, 0, 6, NULL),
-(18, 'vivo V25 Pro 8GB 128GB', 13990000, 42, 'Thiết kế trẻ trung, mặt lưng đổi màu độc đáo - Đổi màu sắc khi có tia UV chiếu vào\r\nDẫn đầu xu hướng nhiếp ảnh mới - Hệ thống ba camera lên đến 64MP, đi kèm chống rung quang học OIS\r\nHiệu năng mạnh mẽ, xử lý đa tác vụ - Bộ vi xử lý Dimensity 1300, RAM 8GB + Mở rộng 8GB\r\nKhông gian giải trí cực đỉnh - Màn hình AMOLED có kích thước 6.56 inch, 120Hz', 0, 0, 0, 0, 0, 6, NULL),
-(19, 'Vivo V27e 8GB 256GB', 8990000, 11, 'Tận hưởng không gian hiển thị đẹp mắt với màn hình AMOLED cùng độ phân giải Full HD+\r\nBắt trọn, lưu giữ mọi khoảnh khắc cùng hệ thống 3 camera sau với nhiều tính năng hiện đại\r\nVi xử lý MediaTek Helio G99 kết hợp cùng RAM 8 GB giúp chinh phục nhiều tác vụ mượt mà\r\nViên pin 4.6000 mAh tích hợp công nghệ sạc nhanh đến 66 W giúp nạp đầy pin trong tích tắc', 0, 0, 1, 0, 0, 6, NULL),
+(17, 'vivo V29E 8GB 256GB', 9800000, 10, 'Hiệu năng vượt trội với chip Snapdragon 695 - Giúp bạn xử lý các tác vụ mượt mà không cần phải lo lắng có bị giật, lag.\r\nMàn hình Sunlight AMOLED 120Hz - Cho hình ảnh sắc nét, màu sắc tươi sáng, trung thực.\r\nPin khủng kèm sạc siêu siêu tốc 44W - Giúp bạn sử dụng thoải mái trong vòng hai ngày.\r\nCụm camera được cải tiến giúp quay video và chụp ra bức ảnh rất tốt, hài hòa, sống động hơn.', 8, 22, 12, 1, 5, 6, NULL),
+(18, 'vivo V25 Pro 8GB 128GB', 13990000, 42, 'Thiết kế trẻ trung, mặt lưng đổi màu độc đáo - Đổi màu sắc khi có tia UV chiếu vào\r\nDẫn đầu xu hướng nhiếp ảnh mới - Hệ thống ba camera lên đến 64MP, đi kèm chống rung quang học OIS\r\nHiệu năng mạnh mẽ, xử lý đa tác vụ - Bộ vi xử lý Dimensity 1300, RAM 8GB + Mở rộng 8GB\r\nKhông gian giải trí cực đỉnh - Màn hình AMOLED có kích thước 6.56 inch, 120Hz', 5, 0, 0, 0, 0, 6, NULL),
+(19, 'Vivo V27e 8GB 256GB', 8990000, 11, 'Tận hưởng không gian hiển thị đẹp mắt với màn hình AMOLED cùng độ phân giải Full HD+\r\nBắt trọn, lưu giữ mọi khoảnh khắc cùng hệ thống 3 camera sau với nhiều tính năng hiện đại\r\nVi xử lý MediaTek Helio G99 kết hợp cùng RAM 8 GB giúp chinh phục nhiều tác vụ mượt mà\r\nViên pin 4.6000 mAh tích hợp công nghệ sạc nhanh đến 66 W giúp nạp đầy pin trong tích tắc', 8, 22, 21, 2, 4, 6, NULL),
 (20, 'Nokia C21 Plus 2GB 32GB', 2390000, 35, 'Thiết kế tinh giản hiện đại, bền bỉ chắc chắn - Chất liệu khung nguyên khối và nhựa cứng\r\nGiải trí sắc nét, sống động từng chi tiết - Màn hình HD+ 6.52 inches\r\nCấu hình ổn định trong phân khúc - Chip Unisoc SC9863A, RAM 2GB\r\nBắt trọn khoảnh khắc - Camera kép 13MP chụp ảnh chi tiết, camera trước 5MP', 0, 0, 0, 0, 0, 7, NULL),
-(21, 'Nokia G11 Plus 3GB 32GB', 3390000, 41, 'Camera kép AI 50MP (khẩu độ f/1.8) lấy nét tự động, bắt trọn mọi khoảnh khắc\r\nVi xử lý 8 nhân mạnh mẽ giúp thao tác nhanh chóng mượt mà\r\nDung lượng pin 5000 mAh bền bỉ cùng chế độ siêu tiết kiệm pin\r\nMàn hình 6.5” chuẩn HD+ với tần số quét 90Hz cho chất lượng hiển thị rõ nét, chân thực', 0, 0, 1, 0, 0, 7, NULL),
+(21, 'Nokia G11 Plus 3GB 32GB', 3390000, 41, 'Camera kép AI 50MP (khẩu độ f/1.8) lấy nét tự động, bắt trọn mọi khoảnh khắc\r\nVi xử lý 8 nhân mạnh mẽ giúp thao tác nhanh chóng mượt mà\r\nDung lượng pin 5000 mAh bền bỉ cùng chế độ siêu tiết kiệm pin\r\nMàn hình 6.5” chuẩn HD+ với tần số quét 90Hz cho chất lượng hiển thị rõ nét, chân thực', 5, 0, 1, 0, 0, 7, NULL),
 (22, 'ASUS ROG Phone 7 Ultimate 16GB 512GB', 29990000, 6, 'Chiến game không giới hạn với vi xử lý Snapdragon 8 Gen2 giúp cải thiện hiệu suất và mức tiêu thụ pin\r\nThiết kế hầm hố chuẩn gaming, trang bị tản nhiệt GameCool 7 giúp hạn chế tối đa tình trạng nóng máy\r\nMàn hình 6.78 inches cực lớn, kết hợp tần số quét 165 Hz mang đến trải nghiệm chiến game tuyệt đỉnh\r\nViên pin 6.000 mAh cùng công suất sạc nhanh đến 65 W, hỗ trợ sạc đầy pin mà chỉ mất vỏn vẹn 42 phút', 0, 0, 0, 0, 0, 9, NULL),
-(23, 'ASUS ROG Phone 7 16GB 512GB', 24990000, 14, 'Hiệu năng khủng với chip Snapdragon 8 Gen2 cùng RAM 16 GB, giúp xử lý tốt mọi tác vụ hàng ngày\r\nTrải nghiệm thị giác siêu mượt mà và sắc nét nhờ tấm nền AMOLED cùng tần số quét lên đến 165 Hz\r\nHệ thống tản nhiệt cao cấp giúp cải thiện khả năng tản nhiệt cũng như nâng cao hiệu suất chơi game\r\nViên pin 6.000 mAh giúp cung cấp năng lượng cho cả ngày dài, đi kèm sạc nhanh công suất đến 65W', 0, 0, 1, 0, 0, 9, NULL),
-(24, 'ASUS ROG Phone 6 Batman 12GB 256GB', 27990000, 46, 'Thiết kế cực ngầu, đậm chất bí ẩn - Ngoại hình độc đáo với k hung viền bằng kim loại, màu sắc ma mị\r\nCấu hình mạnh mẽ chiến mọi tựa game - Snapdragon 8+ Gen 1 cùng RAM 12GB\r\nKhông lo gián đoạn với viên pin lớn 6.000 mAh đi kèm sạc nhanh Quick Charge 5.0 65W\r\nHệ điều hành tuỳ biến theo giao diện người hùng Batman - Tha hồ lựa chọn hình nền động và hiệu ứng âm thanh người hùng', 0, 0, 1, 0, 0, 9, NULL),
-(25, 'Nubia RedMagic 8S Pro 5G 12GB 256GB', 19990000, 5, 'Cấu hình mạnh mẽ với Snapdragon 8 Gen 2 - Sẵn sàng chiến các thể loại game mà không lo giật lag.\r\nThiết kế sang trọng, hiện đại cùng những đường nét trang trí thể hiện đúng tính chất của chiếc một chiếc gaming.\r\nTấm nền AMOLED với kích thước 6.8 inch, độ phân giải Full HD+ - Tạo hình ảnh sắc nét, độ chuẩn màu cao.\r\nDung lượng pin lớn 6000 mAh - Đáp ứng tốt nhu cầu sử dụng cả ngày dài.', 0, 0, 0, 0, 0, 10, NULL),
+(23, 'ASUS ROG Phone 7 16GB 512GB', 24990000, 14, 'Hiệu năng khủng với chip Snapdragon 8 Gen2 cùng RAM 16 GB, giúp xử lý tốt mọi tác vụ hàng ngày\r\nTrải nghiệm thị giác siêu mượt mà và sắc nét nhờ tấm nền AMOLED cùng tần số quét lên đến 165 Hz\r\nHệ thống tản nhiệt cao cấp giúp cải thiện khả năng tản nhiệt cũng như nâng cao hiệu suất chơi game\r\nViên pin 6.000 mAh giúp cung cấp năng lượng cho cả ngày dài, đi kèm sạc nhanh công suất đến 65W', 5, 0, 2, 0, 1, 9, NULL),
+(24, 'ASUS ROG Phone 6 Batman 12GB 256GB', 27990000, 46, 'Thiết kế cực ngầu, đậm chất bí ẩn - Ngoại hình độc đáo với k hung viền bằng kim loại, màu sắc ma mị\r\nCấu hình mạnh mẽ chiến mọi tựa game - Snapdragon 8+ Gen 1 cùng RAM 12GB\r\nKhông lo gián đoạn với viên pin lớn 6.000 mAh đi kèm sạc nhanh Quick Charge 5.0 65W\r\nHệ điều hành tuỳ biến theo giao diện người hùng Batman - Tha hồ lựa chọn hình nền động và hiệu ứng âm thanh người hùng', 0, 0, 3, 0, 0, 9, NULL),
+(25, 'Nubia RedMagic 8S Pro 5G 12GB 256GB', 19990000, 5, 'Cấu hình mạnh mẽ với Snapdragon 8 Gen 2 - Sẵn sàng chiến các thể loại game mà không lo giật lag.\r\nThiết kế sang trọng, hiện đại cùng những đường nét trang trí thể hiện đúng tính chất của chiếc một chiếc gaming.\r\nTấm nền AMOLED với kích thước 6.8 inch, độ phân giải Full HD+ - Tạo hình ảnh sắc nét, độ chuẩn màu cao.\r\nDung lượng pin lớn 6000 mAh - Đáp ứng tốt nhu cầu sử dụng cả ngày dài.', 6, 9, 10, 2, 3, 10, NULL),
 (26, 'Nubia Neo 5G 8GB 256GB', 4990000, 6, 'Tầm nhìn thoải mái, chiến game không lo ngại - Màn hình 6.6 inch cùng tần số quét 120Hz\r\nĐa nhiệm mạnh mẽ, thoải mái sử dụng nhiều tác vụ cùng lúc với RAM mở rộng đến 18GB\r\nHệ thống làm mát chuyên nghiệp với diện tích tản nhiệt 15416mm²\r\nNăng lượng cho cả ngày - Pin 4500mAh và sạc nhanh 22.5W', 0, 0, 1, 0, 0, 10, NULL),
 (27, 'TECNO Camon 20', 4990000, 26, 'Thực hiện tốt đa tác vụ cùng lúc với bộ vi xử lý Helio G85 và dung lượng RAM lên đến 8 GB\r\nHệ thống 2 camera sau có độ phân giải lên đến 64 MP giúp bắt trọn mọi khoảnh khắc nổi bật\r\nChiêm ngưỡng hình ảnh chất lượng cao nhờ vào tấm nền AMOLED, độ phân giải Full HD+\r\nViền siêu mỏng kết hợp với màn hình kích thước 6.67 inch cho không gian hiển thị rộng lớn', 0, 0, 0, 0, 0, 11, NULL),
-(28, 'TECNO Spark 10 8GB 128GB', 3590000, 16, 'Hệ thống camera độ phân giải cao với camera chính đến 50MP, lưu lại khoảnh khắc rõ nét\r\nDung lượng pin 5000mAh sử dụng cả ngày kết hợp cùng công nghệ sạc nhanh đến 18W\r\nĐa nhiệm mượt mà với RAM 8GB (mở rộng 4GB) + ROM 128GB giúp thoải mái lưu trữ\r\nMàn hình lớn 6.6\" HD+ và tần số quét 90Hz cho trải nghiệm giải trí tốt, chạm lướt mượt mà', 0, 0, 0, 0, 0, 11, NULL),
-(29, 'TECNO Spark 10 Pro 8GB 128GB', 3990000, 20, 'Chinh phục nhiều tác vụ một cách mượt mà nhờ bộ vi xử lý Helio G88 cùng RAM 8 GB\r\nTrải nghiệm nhiếp ảnh đỉnh cao với hệ thống camera kép 50 MP và camera selfie 32 MP\r\nMàn hình kích thước lên đến 6.8 inch cùng độ phân giải cao giúp hiển thị rõ nét, đẹp mắt\r\nThiết kế ấn tượng với mặt lưng bóng bẩy giúp người dùng luôn nổi bật trước đám đông', 0, 0, 1, 0, 0, 11, NULL),
+(28, 'TECNO Spark 10 8GB 128GB', 3590000, 16, 'Hệ thống camera độ phân giải cao với camera chính đến 50MP, lưu lại khoảnh khắc rõ nét\r\nDung lượng pin 5000mAh sử dụng cả ngày kết hợp cùng công nghệ sạc nhanh đến 18W\r\nĐa nhiệm mượt mà với RAM 8GB (mở rộng 4GB) + ROM 128GB giúp thoải mái lưu trữ\r\nMàn hình lớn 6.6\" HD+ và tần số quét 90Hz cho trải nghiệm giải trí tốt, chạm lướt mượt mà', 10, 5, 9, 1, 2, 11, NULL),
+(29, 'TECNO Spark 10 Pro 8GB 128GB', 3990000, 20, 'Chinh phục nhiều tác vụ một cách mượt mà nhờ bộ vi xử lý Helio G88 cùng RAM 8 GB\r\nTrải nghiệm nhiếp ảnh đỉnh cao với hệ thống camera kép 50 MP và camera selfie 32 MP\r\nMàn hình kích thước lên đến 6.8 inch cùng độ phân giải cao giúp hiển thị rõ nét, đẹp mắt\r\nThiết kế ấn tượng với mặt lưng bóng bẩy giúp người dùng luôn nổi bật trước đám đông', 0, 0, 4, 0, 1, 11, NULL),
 (30, 'OnePlus 8T 5G', 18990000, 42, 'Thiết kế cực sang, chuẩn smartphone cao cấp\r\nTrải nghiệm mượt mà, giải trí cực đã - Màn hình AMOLED 6.55 inches\r\nHiệu năng mạnh mẽ, trải nghiệm chơi game mượt mà - Snapdragon 865, RAM 12 GB\r\nCamera đa chức năng ấn tượng - Cảm biến chính 48 MP, đa dạng chế độ chụp', 0, 0, 1, 0, 0, 8, NULL),
-(31, 'OnePlus Nord 3 5G 16GB 256GB', 12490000, 12, 'Hiệu suất siêu việt vượt mọi nhu cầu - chip Dimensity 9000 cao cấp, đi kèm RAM 16GB/256GB\r\nNăng lượng cho cả ngày dài - Viên pin lớn 5,000 mAh với hỗ trợ sạc nhanh 80W ấn tượng\r\nKhông gian giải trí cực đỉnh - Màn hình AMOLED có kích thước 6.74 inch, hỗ trợ tần số quét 120Hz\r\nThiết kế trẻ trung và hiện tại phù hợp với mọi cá tính - Viền mỏng án tượng và các cạnh bo tròn đẹp mắt', 0, 0, 0, 0, 0, 8, NULL),
-(32, 'OnePlus 11 5G 16GB 256GB', 19990000, 1, 'Chiến game thả ga - Snapdragon 8 Gen 2, hệ thống tản nhiệt VC Cooling System làm mát hiệu quả\r\nĐa nhiệm cực mượt - RAM 16GB, ROM 256GB\r\nGiải trí sống động - Màn hình viền siêu mỏng, 120Hz, độ phân giải 2K\r\nNâng tầm nhiếp ảnh - Camera chính 50MP, lưu giữ màu sắc chân thực, chống rung hiệu quả', 0, 0, 0, 0, 0, 8, NULL);
+(31, 'OnePlus Nord 3 5G 16GB 256GB', 12490000, 12, 'Hiệu suất siêu việt vượt mọi nhu cầu - chip Dimensity 9000 cao cấp, đi kèm RAM 16GB/256GB\r\nNăng lượng cho cả ngày dài - Viên pin lớn 5,000 mAh với hỗ trợ sạc nhanh 80W ấn tượng\r\nKhông gian giải trí cực đỉnh - Màn hình AMOLED có kích thước 6.74 inch, hỗ trợ tần số quét 120Hz\r\nThiết kế trẻ trung và hiện tại phù hợp với mọi cá tính - Viền mỏng án tượng và các cạnh bo tròn đẹp mắt', 5, 0, 1, 0, 0, 8, NULL),
+(32, 'OnePlus 11 5G 16GB 256GB', 22500000, 10, 'Chiến game thả ga - Snapdragon 8 Gen 2, hệ thống tản nhiệt VC Cooling System làm mát hiệu quả\r\nĐa nhiệm cực mượt - RAM 16GB, ROM 256GB\r\nGiải trí sống động - Màn hình viền siêu mỏng, 120Hz, độ phân giải 2K\r\nNâng tầm nhiếp ảnh - Camera chính 50MP, lưu giữ màu sắc chân thực, chống rung hiệu quả', 11, 14, 15, 0, 3, 8, NULL),
+(33, 'TCL 408 4GB 64GB', 3850000, 10, 'Mô tả 1\r\nMô tả 2\r\nMô tả 3\r\nCác mô tả khác...', 10, 5, 6, 0, 1, 12, NULL),
+(34, 'Điện thoại mới', 2100000, 2, 'Mô tả...', 10, 0, 2, 0, 0, 8, 1);
 
 -- --------------------------------------------------------
 
@@ -662,7 +734,39 @@ INSERT INTO `dienthoai_donhang` (`ma_don_hang`, `ma_dienthoai`, `gia_ban`, `so_l
 (2, 1, 21610000, 3),
 (3, 1, 21610000, 1),
 (4, 1, 21610000, 2),
-(5, 1, 21610000, 1);
+(5, 1, 21610000, 1),
+(6, 8, 44990000, 5),
+(7, 25, 18990000, 4),
+(8, 19, 8000000, 2),
+(9, 17, 8990000, 5),
+(10, 1, 21610000, 5),
+(10, 19, 8000000, 5),
+(10, 32, 20250000, 5),
+(11, 32, 20250000, 5),
+(12, 32, 20250000, 3),
+(13, 19, 8000000, 4),
+(14, 13, 8060000, 2),
+(14, 17, 8990000, 5),
+(14, 19, 8000000, 3),
+(15, 1, 21610000, 4),
+(15, 2, 27590000, 4),
+(15, 17, 8820000, 2),
+(15, 19, 8000000, 3),
+(16, 6, 17330000, 5),
+(16, 17, 8820000, 5),
+(16, 19, 8000000, 5),
+(16, 25, 18990000, 5),
+(16, 32, 20250000, 1),
+(17, 4, 22390000, 5),
+(17, 6, 17330000, 2),
+(17, 14, 6500000, 5),
+(17, 17, 8820000, 5),
+(18, 1, 21610000, 2),
+(18, 13, 8060000, 1),
+(19, 28, 3010000, 5),
+(20, 33, 3460000, 5),
+(21, 8, 44990000, 1),
+(22, 1, 21610000, 2);
 
 -- --------------------------------------------------------
 
@@ -686,7 +790,24 @@ INSERT INTO `donhang` (`ma_don_hang`, `ho_va_ten`, `so_dien_thoai`, `dia_chi`, `
 (2, 'Mai Tiến Dũng', '0567250721', 'Bình Hòa 4, Khuê trung, Cẩm Lệ, Đà Nẵng', '2023-12-03'),
 (3, 'Lee Thanh Hair', '0932591901', '??????', '2023-12-03'),
 (4, 'Ngô Zero', '000000000', 'bbdbdbsbbbbs', '2023-12-03'),
-(5, 'Ngô Zero', '000000000', '123 Abc, Khuê Trung, Cẩm Lệ, Đà Nẵng ', '2023-12-03');
+(5, 'Ngô Zero', '000000000', '123 Abc, Khuê Trung, Cẩm Lệ, Đà Nẵng ', '2023-12-03'),
+(6, 'Mai Tiến Dũng', '0567250721', 'Bình Hòa 4, Khuê trung, Cẩm Lệ, Đà Nẵng', '2023-12-19'),
+(7, 'Mai Tiến Dũng', '0567250721', 'Bình Hòa 4, Khuê trung, Cẩm Lệ, Đà Nẵng', '2023-12-19'),
+(8, 'Mai Tiến Dũng', '0567250721', 'Bình Hòa 4, Khuê trung, Cẩm Lệ, Đà Nẵng', '2023-12-19'),
+(9, 'Mai Tiến Dũng', '0567250721', 'Bình Hòa 4, Khuê trung, Cẩm Lệ, Đà Nẵng', '2023-12-19'),
+(10, 'Lee Thanh Hair', '0932591901', 'Địa chỉ ví dụ', '2023-12-19'),
+(11, 'Hung Nguyen', '0932591901', 'Địa chỉ của Hung Nguyen', '2023-12-19'),
+(12, 'Hung Nguyen', '0932591901', 'Địa chỉ của Hung Nguyen', '2023-12-19'),
+(13, 'Hung Nguyen', '0932591901', 'Địa chỉ của Hung Nguyen', '2023-12-19'),
+(14, 'Hung Nguyen', '0932591901', 'Địa chỉ của Hung Nguyen', '2023-12-19'),
+(15, 'Lee Thanh Hair', '0932591901', 'Địa chỉ của Hair', '2023-12-19'),
+(16, 'NhoAnhHoang', '0000000000', 'Địa chỉ của Hoang', '2023-12-19'),
+(17, 'Ngô Zero', '000000000', 'Địa chỉ của Ngô Zero', '2023-12-19'),
+(18, 'Mai Tiến Dũng', '0567250721', 'Bình Hòa 4, Khuê trung, Cẩm Lệ, Đà Nẵng', '2023-12-22'),
+(19, 'Mai Tiến Dũng', '0567250721', 'Bình Hòa 4, Khuê trung, Cẩm Lệ, Đà Nẵng', '2023-12-22'),
+(20, 'Ngô Zero', '000000000', 'd/c của Ngô', '2023-12-22'),
+(21, 'Ngô Zero', '000000000', 'd/c', '2023-12-22'),
+(22, 'Mai Tiến Dũng', '0567250721', 'Bình Hòa 4, Khuê trung, Cẩm Lệ, Đà Nẵng', '2023-12-23');
 
 -- --------------------------------------------------------
 
@@ -706,11 +827,8 @@ CREATE TABLE `giohang` (
 --
 
 INSERT INTO `giohang` (`ma_giohang`, `ma_nguoidung`, `ma_dienthoai`, `so_luong`) VALUES
-(3, 1, 3, 2),
-(5, 1, 8, 1),
-(7, 1, 1, 1),
-(9, 2, 1, 2),
-(10, 2, 2, 1);
+(19, 5, 28, 1),
+(20, 5, 15, 2);
 
 -- --------------------------------------------------------
 
@@ -738,7 +856,8 @@ INSERT INTO `hang_dienthoai` (`ma_hang`, `ten_hang`) VALUES
 (8, 'ASUS'),
 (9, 'Nubia'),
 (10, 'TECNO'),
-(11, 'OnePlus');
+(11, 'OnePlus'),
+(12, 'TCL');
 
 -- --------------------------------------------------------
 
@@ -763,7 +882,39 @@ INSERT INTO `lich_su_giao_dich` (`ma_giao_dich`, `ma_nguoidung`, `ma_dienthoai`,
 (2, 1, 1, 21610000, 3, '2023-12-03'),
 (3, 2, 1, 21610000, 1, '2023-12-03'),
 (4, 3, 1, 21610000, 2, '2023-12-03'),
-(5, 3, 1, 21610000, 1, '2023-12-03');
+(5, 3, 1, 21610000, 1, '2023-12-03'),
+(6, 1, 8, 44990000, 5, '2023-12-19'),
+(7, 1, 25, 18990000, 4, '2023-12-19'),
+(8, 1, 19, 8000000, 2, '2023-12-19'),
+(9, 1, 17, 8990000, 5, '2023-12-19'),
+(10, 2, 1, 21610000, 5, '2023-12-19'),
+(11, 2, 19, 8000000, 5, '2023-12-19'),
+(12, 2, 32, 20250000, 5, '2023-12-19'),
+(13, 5, 32, 20250000, 5, '2023-12-19'),
+(14, 5, 32, 20250000, 3, '2023-12-19'),
+(15, 5, 19, 8000000, 4, '2023-12-19'),
+(16, 5, 13, 8060000, 2, '2023-12-19'),
+(17, 5, 17, 8990000, 5, '2023-12-19'),
+(18, 5, 19, 8000000, 3, '2023-12-19'),
+(19, 2, 1, 21610000, 4, '2023-12-19'),
+(20, 2, 2, 27590000, 4, '2023-12-19'),
+(21, 2, 17, 8820000, 2, '2023-12-19'),
+(22, 2, 19, 8000000, 3, '2023-12-19'),
+(23, 6, 6, 17330000, 5, '2023-12-19'),
+(24, 6, 17, 8820000, 5, '2023-12-19'),
+(25, 6, 19, 8000000, 5, '2023-12-19'),
+(26, 6, 25, 18990000, 5, '2023-12-19'),
+(27, 6, 32, 20250000, 1, '2023-12-19'),
+(28, 3, 4, 22390000, 5, '2023-12-19'),
+(29, 3, 6, 17330000, 2, '2023-12-19'),
+(30, 3, 14, 6500000, 5, '2023-12-19'),
+(31, 3, 17, 8820000, 5, '2023-12-19'),
+(32, 1, 1, 21610000, 2, '2023-12-22'),
+(33, 1, 13, 8060000, 1, '2023-12-22'),
+(34, 1, 28, 3010000, 5, '2023-12-22'),
+(35, 3, 33, 3460000, 5, '2023-12-22'),
+(36, 3, 8, 44990000, 1, '2023-12-22'),
+(37, 1, 1, 21610000, 2, '2023-12-23');
 
 -- --------------------------------------------------------
 
@@ -790,7 +941,9 @@ INSERT INTO `nguoidung` (`ma_nguoidung`, `quyen_admin`, `ten_dang_nhap`, `mat_kh
 (1, 0, 'mai_tien_dung', '$2y$10$nprBKzfkXEOMNoicD/qVSe1Z0c48Sb1A3GXjSqQKA8dr3Jy50tizy', 'Mai Tiến Dũng', 'dungmt.22ns@vku.udn.vn', '0567250721', 'Bình Hòa 4, Khuê trung, Cẩm Lệ, Đà Nẵng'),
 (2, 0, 'le_thanh_hai', '$2y$10$Uw2vIu20tzK/8CUiBVaIXO7znura8xN6epFANK5ip4UhND8RghDKu', 'Lee Thanh Hair', 'hailt.22ns@vku.udn.vn', '0932591901', ''),
 (3, 0, 'ngo_zero', '$2y$10$mTxvYMGOdmrC759C6.YfEui7C3lckXlNeLru/24yTnieAkT3Os7hG', 'Ngô Zero', 'ngozero@gmail.com', '000000000', ''),
-(4, 1, '@cps_admin_mtd', '$2y$10$cwnS55m4oYll7WpvQOuAbe533enGAWBulUDbu3KDo0C27ar7l9Q3a', 'Admin', NULL, NULL, NULL);
+(4, 1, '@cps_admin_mtd', '$2y$10$cwnS55m4oYll7WpvQOuAbe533enGAWBulUDbu3KDo0C27ar7l9Q3a', 'Admin', NULL, NULL, NULL),
+(5, 0, 'nguyen_dang_hung', '$2y$10$zSa1IUvAsspudR/7J36e6OOLAh0Ab.eG.DMWmuUx9SW8HoCBRlwi.', 'Hung Nguyen', 'hungnguyen@gmail.com', '0932591901', 'Địa chỉ của Hung Nguyen'),
+(6, 0, 'tran_huy_hoang', '$2y$10$.dU.mWgEOyL.pwpwZc/rdOYcgymXsCuEh/PrXej6SEWfXVIm/9ar6', 'NhoAnhHoang', '', '0000000000', 'Địa chỉ của Hoang');
 
 -- --------------------------------------------------------
 
@@ -815,7 +968,30 @@ INSERT INTO `nhap_dienthoai` (`ma_nhap`, `ma_dienthoai`, `ngay_nhap`, `gia_nhap`
 (2, 2, '2023-12-07', 21500000, 10),
 (3, 7, '2023-12-07', 15500000, 5),
 (4, 8, '2023-12-07', 37000000, 15),
-(5, 6, '2023-12-07', 25000000, 7);
+(5, 6, '2023-12-07', 25000000, 7),
+(6, 32, '2023-12-19', 15500000, 5),
+(7, 13, '2023-12-19', 6450000, 10),
+(8, 18, '2023-12-19', 9000000, 5),
+(9, 15, '2023-12-19', 4900000, 15),
+(10, 21, '2023-12-19', 1300000, 5),
+(11, 28, '2023-12-19', 1900000, 15),
+(12, 31, '2023-12-19', 8000000, 5),
+(13, 25, '2023-12-19', 14400000, 15),
+(14, 23, '2023-12-19', 17300000, 5),
+(15, 17, '2023-12-19', 5600000, 10),
+(16, 14, '2023-12-19', 4200000, 15),
+(17, 19, '2023-12-19', 4950000, 15),
+(18, 4, '2023-12-19', 24600000, 10),
+(19, 1, '2023-12-19', 16000000, 10),
+(20, 11, '2023-12-19', 2400000, 15),
+(21, 32, '2023-12-19', 12400000, 10),
+(22, 17, '2023-12-19', 4000000, 20),
+(23, 19, '2023-12-19', 3100000, 15),
+(24, 32, '2023-12-22', 10300000, 10),
+(25, 33, '2023-12-22', 1200000, 5),
+(26, 33, '2023-12-22', 1330000, 5),
+(27, 34, '2023-12-23', 1400000, 10),
+(28, 33, '2024-01-05', 1400000, 5);
 
 -- --------------------------------------------------------
 
@@ -1259,7 +1435,19 @@ INSERT INTO `thong_so_ky_thuat_dienthoai` (`ma_thong_so`, `ma_dienthoai`, `gia_t
 (9, 32, '2 SIM (nano‑SIM và eSIM)'),
 (10, 32, 'OxygenOS trên nền tảng Android™ 13'),
 (11, 32, '1440 x 3216 pixels (QHD+)'),
-(12, 32, 'Corning® Gorilla® Glass Victus, Hỗ trợ sRGB, Display P3, 10-bit Color Depth, HDR10+');
+(12, 32, 'Corning® Gorilla® Glass Victus, Hỗ trợ sRGB, Display P3, 10-bit Color Depth, HDR10+'),
+(1, 33, 'Kích thước mh 2'),
+(2, 33, 'Công nghệ mh 2'),
+(3, 33, 'Cam sau'),
+(4, 33, 'Cam trước'),
+(5, 33, 'Chip'),
+(6, 33, 'RAM'),
+(7, 33, 'Nhớ trong'),
+(8, 33, 'Pin'),
+(9, 33, 'SIM'),
+(10, 33, 'OS'),
+(11, 33, 'Phân giải mh'),
+(12, 33, 'Tính năng mh');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -1377,67 +1565,67 @@ ALTER TABLE `thong_so_ky_thuat_dienthoai`
 -- AUTO_INCREMENT cho bảng `anh_dienthoai`
 --
 ALTER TABLE `anh_dienthoai`
-  MODIFY `ma_anh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=489;
+  MODIFY `ma_anh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=495;
 
 --
 -- AUTO_INCREMENT cho bảng `ban_dienthoai`
 --
 ALTER TABLE `ban_dienthoai`
-  MODIFY `ma_ban` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ma_ban` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT cho bảng `binhluan`
 --
 ALTER TABLE `binhluan`
-  MODIFY `ma_binhluan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `ma_binhluan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT cho bảng `danhgia`
 --
 ALTER TABLE `danhgia`
-  MODIFY `ma_danhgia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `ma_danhgia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT cho bảng `dienthoai`
 --
 ALTER TABLE `dienthoai`
-  MODIFY `ma_dienthoai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `ma_dienthoai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT cho bảng `donhang`
 --
 ALTER TABLE `donhang`
-  MODIFY `ma_don_hang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ma_don_hang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT cho bảng `giohang`
 --
 ALTER TABLE `giohang`
-  MODIFY `ma_giohang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ma_giohang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT cho bảng `hang_dienthoai`
 --
 ALTER TABLE `hang_dienthoai`
-  MODIFY `ma_hang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `ma_hang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT cho bảng `lich_su_giao_dich`
 --
 ALTER TABLE `lich_su_giao_dich`
-  MODIFY `ma_giao_dich` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ma_giao_dich` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT cho bảng `nguoidung`
 --
 ALTER TABLE `nguoidung`
-  MODIFY `ma_nguoidung` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ma_nguoidung` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT cho bảng `nhap_dienthoai`
 --
 ALTER TABLE `nhap_dienthoai`
-  MODIFY `ma_nhap` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ma_nhap` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT cho bảng `slide`
